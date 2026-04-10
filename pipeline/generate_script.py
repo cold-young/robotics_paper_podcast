@@ -36,15 +36,16 @@ RETRY_DELAY = 5  # seconds
 
 SYSTEM_PROMPT = """\
 당신은 로보틱스 분야의 한국어 팟캐스트 진행자입니다.
-두 명의 호스트(민수, 지연)가 자연스러운 대화 형식으로 오늘의 논문들을 소개합니다.
+두 명의 호스트(뭉이, 망망이)가 자연스러운 대화 형식으로 오늘의 논문들을 소개합니다.
 
 규칙:
 1. 모든 대화는 한국어로 진행합니다.
-2. 논문의 핵심 기여와 의미를 비전문가도 이해할 수 있게 설명합니다.
+2. 논문의 핵심 기여와 의미를 로보틱스 분야 대학원생 청자를 대상으로 설명합니다.
 3. 전문 용어는 영어 원문을 병기합니다 (예: "손재주 조작(Dexterous Manipulation)").
-4. 호스트 간에 자연스러운 리액션과 질문을 포함합니다.
-5. 각 논문 소개는 1-2분 분량으로 간결하게 합니다.
-6. 인트로와 아웃트로를 포함합니다.
+4. 논문의 주요 방법론에 대해서 간단히 설명합니다.
+5. 호스트 간에 자연스러운 리액션과 질문을 포함합니다.
+6. 각 논문 소개는 2분 분량으로 간결하게 합니다.
+7. 인트로와 아웃트로를 포함합니다.
 
 출력 형식 (JSON):
 {
@@ -52,8 +53,8 @@ SYSTEM_PROMPT = """\
   "description": "에피소드 설명 (1-2문장)",
   "estimated_duration": "예상 시간",
   "dialogue": [
-    {"speaker": "민수", "text": "대사"},
-    {"speaker": "지연", "text": "대사"},
+    {"speaker": "뭉이", "text": "대사"},
+    {"speaker": "망망이", "text": "대사"},
     ...
   ]
 }
@@ -76,7 +77,7 @@ def _build_user_prompt(papers: list[dict], target_date: str) -> str:
         paper_descriptions.append(desc)
 
     return f"""오늘 날짜: {target_date}
-오늘의 Dexterous Manipulation 관련 arXiv 논문 {len(papers)}편을 소개하는 팟캐스트를 만들어주세요.
+오늘의 Dexterous Manipulation 관련 최신 논문 {len(papers)}편을 소개하는 팟캐스트를 만들어주세요.
 
 {chr(10).join(paper_descriptions)}
 
@@ -198,18 +199,18 @@ def _fallback_script(papers: list[dict], target_date: str) -> dict:
     """LLM API가 없을 때 사용하는 템플릿 기반 대본 생성."""
     dialogue = [
         {
-            "speaker": "민수",
+            "speaker": "뭉이",
             "text": f"안녕하세요! 오늘은 {target_date}, Dexterous Manipulation 데일리 팟캐스트입니다.",
         },
         {
-            "speaker": "지연",
+            "speaker": "망망이",
             "text": f"네, 오늘은 총 {len(papers)}편의 논문을 준비했어요. 바로 시작해볼까요?",
         },
     ]
 
     for i, p in enumerate(papers, 1):
         dialogue.append({
-            "speaker": "민수",
+            "speaker": "뭉이",
             "text": f"{i}번째 논문은 '{p['title']}' 입니다. {p['authors']} 팀의 연구인데요.",
         })
 
@@ -218,21 +219,21 @@ def _fallback_script(papers: list[dict], target_date: str) -> dict:
         summary = ". ".join(sentences[:2]) + "."
 
         dialogue.append({
-            "speaker": "지연",
+            "speaker": "망망이",
             "text": f"이 논문의 핵심은, {summary}",
         })
         dialogue.append({
-            "speaker": "민수",
+            "speaker": "뭉이",
             "text": "정말 흥미로운 연구네요. 다음 논문도 살펴보겠습니다.",
         })
 
     dialogue.extend([
         {
-            "speaker": "지연",
+            "speaker": "망망이",
             "text": "오늘 준비한 논문은 여기까지입니다!",
         },
         {
-            "speaker": "민수",
+            "speaker": "뭉이",
             "text": "네, 다음 에피소드에서 또 만나요. 감사합니다!",
         },
     ])
