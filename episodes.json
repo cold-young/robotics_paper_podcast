@@ -1,8 +1,8 @@
 [
   {
     "date": "2026-04-10",
-    "title": "손끝의 감각과 언어의 만남: 최신 Dexterous Manipulation 연구 리뷰",
-    "description": "음향 센서를 이용한 미끄러짐 추정 A-SLIP과 3DGS 기반의 언어-동작 연결 연구 BLaDA를 소개합니다.",
+    "title": "로봇의 손끝 감각부터 언어 이해까지: Dexterous Manipulation 정복기",
+    "description": "손재주 조작을 위한 최첨단 음향 센싱 기술 'A-SLIP'과 3DGS를 활용한 언어 기반 조작 모델 'BLaDA'를 소개합니다.",
     "papers": [
       {
         "title": "A-SLIP: Acoustic Sensing for Continuous In-hand Slip Estimation",
