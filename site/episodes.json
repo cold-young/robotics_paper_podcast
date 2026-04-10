@@ -1,0 +1,19 @@
+[
+  {
+    "date": "2026-04-10",
+    "title": "로봇의 손끝 감각과 지능: 미끄러짐 감지부터 언어 이해까지",
+    "description": "2026년 4월 10일자 최신 논문을 통해 로봇의 정교한 손재주 조작(Dexterous Manipulation) 기술의 최전선을 살펴봅니다.",
+    "papers": [
+      {
+        "title": "A-SLIP: Acoustic Sensing for Continuous In-hand Slip Estimation",
+        "url": "http://arxiv.org/abs/2604.08528"
+      },
+      {
+        "title": "BLaDA: Bridging Language to Functional Dexterous Actions within 3DGS Fields",
+        "url": "http://arxiv.org/abs/2604.08410"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-04-10.mp3",
+    "duration": "4분"
+  }
+]

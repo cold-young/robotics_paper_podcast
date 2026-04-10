@@ -1,0 +1,6 @@
+# TTS
+melo-tts>=0.1.0
+pydub>=0.25.0
+
+# Audio processing (pydub backend)
+# ffmpeg 시스템 설치 필요: apt install ffmpeg / brew install ffmpeg
