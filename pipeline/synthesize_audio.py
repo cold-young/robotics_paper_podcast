@@ -17,7 +17,7 @@ import urllib.error
 import wave
 from pathlib import Path
 
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "AIzaSyCsGBKmc52Octa5pYp8l5_3JTsirfH8pII")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 TTS_MODEL = "gemini-2.5-flash-preview-tts"
 TTS_ENDPOINT = (
     f"https://generativelanguage.googleapis.com/v1beta/models/{TTS_MODEL}:generateContent"

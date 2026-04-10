@@ -1,0 +1,41 @@
+name: Daily Podcast
+
+on:
+  schedule:
+    # 매일 KST 08:00 (UTC 23:00 전날)
+    - cron: "0 23 * * *"
+  workflow_dispatch: # 수동 실행
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install pydub
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Run pipeline
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL || 'https://generativelanguage.googleapis.com/v1beta/openai' }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL || 'gemini-3.1-flash-lite-preview' }}
+        run: python -m pipeline.main
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site

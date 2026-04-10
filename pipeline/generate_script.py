@@ -24,7 +24,7 @@ from typing import Any
 # export LLM_BASE_URL="https://generativelanguage.googleapis.com/v1beta/openai/"
 # export LLM_MODEL="gemini-2.5-flash"
 # ── Config ──
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "AIzaSyCsGBKmc52Octa5pYp8l5_3JTsirfH8pII")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
 LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai")
 LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-3.1-flash-lite-preview")
 # 폴백 모델 목록 (첫 번째 모델 실패 시 순서대로 시도)
