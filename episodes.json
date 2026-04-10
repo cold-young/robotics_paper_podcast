@@ -1,0 +1,19 @@
+[
+  {
+    "date": "2026-04-10",
+    "title": "로봇의 손끝 감각부터 언어 이해까지: 최신 Dexterous Manipulation 연구",
+    "description": "손 안에서 미끄러짐을 감지하는 A-SLIP과 3DGS를 활용해 언어로 정교한 조작을 수행하는 BLaDA 논문을 소개합니다.",
+    "papers": [
+      {
+        "title": "A-SLIP: Acoustic Sensing for Continuous In-hand Slip Estimation",
+        "url": "http://arxiv.org/abs/2604.08528"
+      },
+      {
+        "title": "BLaDA: Bridging Language to Functional Dexterous Actions within 3DGS Fields",
+        "url": "http://arxiv.org/abs/2604.08410"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-04-10.mp3",
+    "duration": "5분"
+  }
+]
