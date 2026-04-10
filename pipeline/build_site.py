@@ -1,7 +1,7 @@
 """
-사이트 빌드 모듈
-================
-에피소드 메타데이터를 기반으로 GitHub Pages용 HTML을 생성/업데이트합니다.
+Site Builder Module
+===================
+Generates/updates GitHub Pages HTML based on episode metadata.
 """
 
 import json
@@ -14,7 +14,7 @@ EPISODES_JSON = "episodes.json"
 
 
 def _load_episodes(site_dir: str) -> list[dict]:
-    """기존 에피소드 목록을 로드합니다."""
+    """Load existing episode list."""
     path = Path(site_dir) / EPISODES_JSON
     if path.exists():
         with open(path, "r", encoding="utf-8") as f:
@@ -23,7 +23,7 @@ def _load_episodes(site_dir: str) -> list[dict]:
 
 
 def _save_episodes(episodes: list[dict], site_dir: str):
-    """에피소드 목록을 저장합니다."""
+    """Save episode list."""
     path = Path(site_dir) / EPISODES_JSON
     with open(path, "w", encoding="utf-8") as f:
         json.dump(episodes, f, ensure_ascii=False, indent=2)
@@ -31,35 +31,35 @@ def _save_episodes(episodes: list[dict], site_dir: str):
 
 def build_site(episode_meta: dict, site_dir: str, audio_src_path: str):
     """
-    새 에피소드를 사이트에 추가합니다.
+    Add a new episode to the site.
 
     Args:
-        episode_meta: 에피소드 메타데이터
-        site_dir: GitHub Pages 루트 디렉토리
-        audio_src_path: 합성된 MP3 파일 경로
+        episode_meta: Episode metadata dict
+        site_dir: GitHub Pages root directory
+        audio_src_path: Path to the synthesized MP3 file
     """
     site_path = Path(site_dir)
     episodes_dir = site_path / "episodes"
     episodes_dir.mkdir(parents=True, exist_ok=True)
 
-    # 오디오 파일 복사
+    # Copy audio file
     audio_filename = f"episode_{episode_meta['date']}.mp3"
     audio_dest = episodes_dir / audio_filename
     shutil.copy2(audio_src_path, audio_dest)
     episode_meta["audio_file"] = f"episodes/{audio_filename}"
 
-    # 에피소드 목록 업데이트 (중복 방지)
+    # Update episode list (prevent duplicates)
     episodes = _load_episodes(site_dir)
     episodes = [ep for ep in episodes if ep["date"] != episode_meta["date"]]
-    episodes.insert(0, episode_meta)  # 최신 에피소드를 맨 앞에
+    episodes.insert(0, episode_meta)  # Latest episode first
     _save_episodes(episodes, site_dir)
 
-    # index.html 생성
+    # Generate index.html
     _generate_index_html(site_path, episodes)
 
 
 def _generate_index_html(site_path: Path, episodes: list[dict]):
-    """index.html을 생성합니다."""
+    """Generate index.html."""
     html = f"""\
 <!DOCTYPE html>
 <html lang="ko">
@@ -151,9 +151,6 @@ def _generate_index_html(site_path: Path, episodes: list[dict]):
     .papers a:hover {{
       color: #48cfcb;
     }}
-    .papers a::before {{
-      content: '📄 ';
-    }}
 
     /* ── Episode List ── */
     .episode-list {{
@@ -199,12 +196,12 @@ def _generate_index_html(site_path: Path, episodes: list[dict]):
 <body>
   <div class="container">
     <header>
-      <h1>🤖 Dexterous Manipulation Daily</h1>
-      <p>arXiv 논문 기반 한국어 AI 팟캐스트</p>
+      <h1>Dexterous Manipulation Daily</h1>
+      <p>AI-powered Korean podcast from arXiv papers</p>
     </header>
 
     <div class="player" id="player">
-      <div class="player-title" id="player-title">에피소드를 선택하세요</div>
+      <div class="player-title" id="player-title">Select an episode</div>
       <div class="player-date" id="player-date"></div>
       <audio controls id="audio-el">
         <source id="audio-src" src="" type="audio/mpeg">
@@ -212,12 +209,12 @@ def _generate_index_html(site_path: Path, episodes: list[dict]):
       <div class="papers" id="paper-links"></div>
     </div>
 
-    <h2>에피소드 목록</h2>
+    <h2>Episodes</h2>
     <ul class="episode-list" id="episode-list"></ul>
 
     <footer>
       Powered by <a href="https://github.com/cold-young/robotics_paper_daily">robotics_paper_daily</a>
-      + MeloTTS
+      + Gemini TTS
     </footer>
   </div>
 

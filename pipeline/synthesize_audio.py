@@ -1,16 +1,17 @@
 """
-음성 합성 모듈
-==============
-Gemini 2.5 Flash TTS를 사용하여 팟캐스트 대본을 MP3로 합성합니다.
-다중 화자(민수, 지연)를 네이티브로 지원합니다.
+Audio Synthesis Module
+======================
+Synthesizes podcast scripts to MP3 using Gemini 2.5 Flash TTS.
+Supports multi-speaker voices natively.
 
-환경변수:
-    LLM_API_KEY : Gemini API 키 (generate_script.py와 공유)
+Environment variables:
+    LLM_API_KEY : Gemini API key (shared with generate_script.py)
 """
 
 import base64
 import json
 import os
+import tempfile
 import time
 import urllib.request
 import urllib.error
@@ -23,33 +24,33 @@ TTS_ENDPOINT = (
     f"https://generativelanguage.googleapis.com/v1beta/models/{TTS_MODEL}:generateContent"
 )
 
-# 호스트별 음성 설정
+# Speaker voice config
 SPEAKER_VOICES = {
-    "민수": "Orus",    # 남성 음성
-    "지연": "Leda",    # 여성 음성
+    "망망이": "Puck",    # Male — soft, gentle tone (shy puppy)
+    "뭉이": "Aoede",    # Female — bright, cheerful tone (quirky hamster)
 }
 
-# TTS API 제한: RPM=3 이므로 호출 간 간격 필요
-TTS_CALL_INTERVAL = 21  # seconds (60s / 3 RPM = 20s, 여유 1s 추가)
+# TTS API rate limit: RPM=3, so we need intervals between calls
+TTS_CALL_INTERVAL = 21  # seconds (60s / 3 RPM = 20s + 1s margin)
 MAX_RETRIES = 3
 
-# Gemini TTS 입력 토큰 제한 (약 8192 토큰 ≈ 5000자 한국어)
+# Gemini TTS input token limit (~8192 tokens ≈ 5000 Korean chars)
 MAX_CHARS_PER_CHUNK = 4000
 
 
 def _call_tts(text: str, speaker_voices: dict[str, str] | None = None) -> bytes:
     """
-    Gemini TTS API를 호출하여 PCM 오디오 데이터를 반환합니다.
+    Call Gemini TTS API and return raw PCM audio data.
 
     Args:
-        text: TTS할 텍스트 (다중 화자 형식: "Speaker: 대사" 줄바꿈 구분)
-        speaker_voices: {speaker_name: voice_name} 매핑
+        text: Text to synthesize (multi-speaker format: "Speaker: line" per line)
+        speaker_voices: {speaker_name: voice_name} mapping
 
     Returns:
         Raw PCM bytes (16-bit, 24kHz, mono)
     """
     if speaker_voices and len(speaker_voices) > 1:
-        # 다중 화자 설정
+        # Multi-speaker config
         speech_config = {
             "multiSpeakerVoiceConfig": {
                 "speakerVoiceConfigs": [
@@ -64,7 +65,7 @@ def _call_tts(text: str, speaker_voices: dict[str, str] | None = None) -> bytes:
             }
         }
     else:
-        # 단일 화자
+        # Single speaker
         voice = list(speaker_voices.values())[0] if speaker_voices else "Kore"
         speech_config = {
             "voiceConfig": {
@@ -105,25 +106,25 @@ def _call_tts(text: str, speaker_voices: dict[str, str] | None = None) -> bytes:
 
             if e.code == 429:
                 wait = TTS_CALL_INTERVAL * attempt
-                print(f"    ⚠ 429 Rate Limit. {wait}초 대기 후 재시도...")
+                print(f"    ! 429 Rate Limit. Waiting {wait}s before retry...")
                 time.sleep(wait)
                 continue
             elif e.code == 503:
-                print(f"    ⚠ 503 Service Unavailable. {TTS_CALL_INTERVAL}초 후 재시도...")
+                print(f"    ! 503 Service Unavailable. Retrying in {TTS_CALL_INTERVAL}s...")
                 time.sleep(TTS_CALL_INTERVAL)
                 continue
             else:
-                raise RuntimeError(f"TTS API 오류 (HTTP {e.code}): {body}") from e
+                raise RuntimeError(f"TTS API error (HTTP {e.code}): {body}") from e
         except urllib.error.URLError as e:
-            print(f"    ⚠ 네트워크 오류: {e.reason}. 재시도...")
+            print(f"    ! Network error: {e.reason}. Retrying...")
             time.sleep(5)
             continue
 
-    raise RuntimeError(f"TTS API 호출 {MAX_RETRIES}회 실패")
+    raise RuntimeError(f"TTS API call failed after {MAX_RETRIES} attempts")
 
 
 def _pcm_to_wav(pcm_data: bytes, wav_path: str, sample_rate: int = 24000):
-    """Raw PCM 데이터를 WAV 파일로 저장합니다."""
+    """Save raw PCM data as a WAV file."""
     with wave.open(wav_path, "wb") as wf:
         wf.setnchannels(1)
         wf.setsampwidth(2)  # 16-bit
@@ -132,7 +133,7 @@ def _pcm_to_wav(pcm_data: bytes, wav_path: str, sample_rate: int = 24000):
 
 
 def _dialogue_to_tts_text(dialogue: list[dict]) -> str:
-    """대화 목록을 Gemini TTS 다중 화자 형식으로 변환합니다."""
+    """Convert dialogue list to Gemini TTS multi-speaker format."""
     lines = []
     for turn in dialogue:
         speaker = turn["speaker"]
@@ -142,7 +143,7 @@ def _dialogue_to_tts_text(dialogue: list[dict]) -> str:
 
 
 def _chunk_dialogue(dialogue: list[dict], max_chars: int = MAX_CHARS_PER_CHUNK) -> list[list[dict]]:
-    """대화를 TTS 입력 제한에 맞게 청크로 분할합니다."""
+    """Split dialogue into chunks that fit within TTS input limits."""
     chunks = []
     current_chunk = []
     current_len = 0
@@ -167,11 +168,11 @@ def _chunk_dialogue(dialogue: list[dict], max_chars: int = MAX_CHARS_PER_CHUNK) 
 
 def synthesize_podcast(script: dict, output_path: str) -> str:
     """
-    팟캐스트 대본을 MP3 파일로 합성합니다.
+    Synthesize a podcast script into an MP3 file.
 
     Args:
-        script: generate_script에서 생성된 대본 dict
-        output_path: 출력 MP3 파일 경로
+        script: Script dict from generate_script
+        output_path: Output MP3 file path
 
     Returns:
         output_path
@@ -180,37 +181,36 @@ def synthesize_podcast(script: dict, output_path: str) -> str:
         from pydub import AudioSegment
     except ImportError:
         raise ImportError(
-            "pydub가 필요합니다:\n"
+            "pydub is required:\n"
             "  pip install pydub\n"
-            "  (ffmpeg도 설치 필요: brew install ffmpeg)"
+            "  (ffmpeg also needed: brew install ffmpeg)"
         )
 
     dialogue = script["dialogue"]
 
-    # 대화에 등장하는 화자만 추출
+    # Extract speakers present in the script
     speakers_in_script = set(turn["speaker"] for turn in dialogue)
     voices = {s: SPEAKER_VOICES.get(s, "Kore") for s in speakers_in_script}
 
-    # 대화를 청크로 분할
+    # Split dialogue into chunks
     chunks = _chunk_dialogue(dialogue)
-    print(f"    총 {len(dialogue)}개 대사 → {len(chunks)}개 청크로 분할")
+    print(f"    {len(dialogue)} lines -> {len(chunks)} chunk(s)")
 
     all_pcm = bytearray()
 
     for i, chunk in enumerate(chunks):
-        print(f"    [{i+1}/{len(chunks)}] 청크 합성 중 ({len(chunk)}개 대사)...")
+        print(f"    [{i+1}/{len(chunks)}] Synthesizing chunk ({len(chunk)} lines)...")
 
         tts_text = _dialogue_to_tts_text(chunk)
         pcm_data = _call_tts(tts_text, voices)
         all_pcm.extend(pcm_data)
 
-        # RPM 제한 준수: 마지막 청크가 아니면 대기
+        # Respect RPM limit: wait between chunks
         if i < len(chunks) - 1:
-            print(f"    ⏳ RPM 제한 대기 ({TTS_CALL_INTERVAL}초)...")
+            print(f"    Waiting for RPM limit ({TTS_CALL_INTERVAL}s)...")
             time.sleep(TTS_CALL_INTERVAL)
 
-    # PCM → WAV → MP3 변환
-    import tempfile
+    # PCM -> WAV -> MP3
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
         tmp_wav = tmp.name
 
@@ -224,14 +224,14 @@ def synthesize_podcast(script: dict, output_path: str) -> str:
     return output_path
 
 
-# ── CLI 테스트 ──
+# ── CLI test ──
 if __name__ == "__main__":
     test_script = {
-        "title": "테스트 에피소드",
+        "title": "Test Episode",
         "dialogue": [
-            {"speaker": "민수", "text": "안녕하세요! 오늘의 팟캐스트를 시작합니다."},
-            {"speaker": "지연", "text": "네, 오늘은 흥미로운 논문이 있어요."},
-            {"speaker": "민수", "text": "감사합니다. 다음에 또 만나요!"},
+            {"speaker": "망망이", "text": "안녕하세요! 오늘의 팟캐스트를 시작합니다."},
+            {"speaker": "뭉이", "text": "네, 오늘은 흥미로운 논문이 있어요."},
+            {"speaker": "망망이", "text": "감사합니다. 다음에 또 만나요!"},
         ],
     }
     out = synthesize_podcast(test_script, "test_output.mp3")

@@ -1,8 +1,8 @@
 """
-논문 수집 모듈
-=============
-cold-young/robotics_paper_daily 의 README.md를 파싱하여
-Dexterous 섹션의 최신 논문을 추출합니다.
+Paper Fetcher Module
+====================
+Parses the README.md from cold-young/robotics_paper_daily
+and extracts the latest papers from the Dexterous section.
 """
 
 import re
@@ -16,7 +16,7 @@ REPO_RAW_URL = (
 
 
 def fetch_readme() -> str:
-    """GitHub Raw URL에서 README.md를 가져옵니다."""
+    """Fetch README.md from GitHub raw URL."""
     req = urllib.request.Request(REPO_RAW_URL, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=30) as resp:
         return resp.read().decode("utf-8")
@@ -24,12 +24,12 @@ def fetch_readme() -> str:
 
 def parse_dexterous_section(readme: str) -> list[dict]:
     """
-    README.md에서 Dexterous 섹션의 논문 테이블을 파싱합니다.
+    Parse the paper table from the Dexterous section.
 
     Returns:
         list of dict with keys: date, title, abstract, authors, url, web
     """
-    # Dexterous 섹션 추출 (## Dexterous ~ 다음 ## 섹션 전까지)
+    # Extract Dexterous section (## Dexterous ~ next ## section)
     dex_match = re.search(
         r"## Dexterous\b.*?\n(.*?)(?=\n## (?:Manipulation|VLA|$))",
         readme,
@@ -40,32 +40,30 @@ def parse_dexterous_section(readme: str) -> list[dict]:
 
     section = dex_match.group(1)
 
-    # ── 포맷 A (현재): <details> 태그 + 백틱 태그 ──
-    # | **날짜** | **제목** `tag` <details><summary>Abstract</summary>초록</details> | 저자 | 링크 |
+    # Format A (current): <details> tag + backtick tags
     row_pattern_details = re.compile(
-        r"\|\s*\*\*(\d{4}-\d{2}-\d{2})\*\*\s*\|"                     # 날짜
-        r"\s*\*\*(.*?)\*\*"                                            # 제목
-        r"((?:\s*`[^`]+`)*)"                                           # 태그 (옵션)
-        r"\s*<details><summary>Abstract</summary>(.*?)</details>"      # 초록 (details 태그)
-        r"\s*\|\s*(.*?)\s*\|"                                          # 저자
-        r"\s*(.*?)\s*\|",                                              # 링크
+        r"\|\s*\*\*(\d{4}-\d{2}-\d{2})\*\*\s*\|"                     # date
+        r"\s*\*\*(.*?)\*\*"                                            # title
+        r"((?:\s*`[^`]+`)*)"                                           # tags (optional)
+        r"\s*<details><summary>Abstract</summary>(.*?)</details>"      # abstract
+        r"\s*\|\s*(.*?)\s*\|"                                          # authors
+        r"\s*(.*?)\s*\|",                                              # links
         re.DOTALL,
     )
 
-    # ── 포맷 B (이전): Abstract: 인라인 ──
-    # | **날짜** | **제목** Abstract: 초록 | 저자 | 링크 |
+    # Format B (legacy): inline Abstract
     row_pattern_inline = re.compile(
-        r"\|\s*\*\*(\d{4}-\d{2}-\d{2})\*\*\s*\|"   # 날짜
-        r"\s*\*\*(.*?)\*\*"                           # 제목
-        r"\s*Abstract:\s*(.*?)\s*\|"                  # 초록 (인라인)
-        r"\s*(.*?)\s*\|"                              # 저자
-        r"\s*(.*?)\s*\|",                             # 링크
+        r"\|\s*\*\*(\d{4}-\d{2}-\d{2})\*\*\s*\|"   # date
+        r"\s*\*\*(.*?)\*\*"                           # title
+        r"\s*Abstract:\s*(.*?)\s*\|"                  # abstract (inline)
+        r"\s*(.*?)\s*\|"                              # authors
+        r"\s*(.*?)\s*\|",                             # links
         re.DOTALL,
     )
 
     papers = []
 
-    # 포맷 A 먼저 시도
+    # Try format A first
     for m in row_pattern_details.finditer(section):
         date_str = m.group(1).strip()
         title = m.group(2).strip()
@@ -74,7 +72,7 @@ def parse_dexterous_section(readme: str) -> list[dict]:
         authors = m.group(5).strip()
         links_raw = m.group(6).strip()
 
-        # 초록 정리
+        # Clean abstract
         abstract = re.sub(r"<[^>]+>", "", abstract)
         abstract = re.sub(r"\s+", " ", abstract).strip()
 
@@ -91,7 +89,7 @@ def parse_dexterous_section(readme: str) -> list[dict]:
             "web": web_match.group(1) if web_match else "",
         })
 
-    # 포맷 A에서 결과가 없으면 포맷 B 시도
+    # Fall back to format B if no results
     if not papers:
         for m in row_pattern_inline.finditer(section):
             date_str = m.group(1).strip()
@@ -124,11 +122,11 @@ def fetch_latest_dexterous_papers(
     max_papers: int = 5,
 ) -> list[dict]:
     """
-    Dexterous 섹션에서 특정 날짜(또는 가장 최근 날짜)의 논문을 반환합니다.
+    Return papers from the Dexterous section for a specific date (or most recent).
 
     Args:
-        target_date: "YYYY-MM-DD" 형식. None이면 가장 최근 날짜 사용.
-        max_papers: 최대 논문 수.
+        target_date: "YYYY-MM-DD" format. None uses the most recent date.
+        max_papers: Maximum number of papers to return.
 
     Returns:
         list of paper dicts
@@ -140,23 +138,23 @@ def fetch_latest_dexterous_papers(
         return []
 
     if target_date:
-        # 해당 날짜 논문 필터
+        # Filter by target date
         filtered = [p for p in all_papers if p["date"] == target_date]
         if filtered:
             return filtered[:max_papers]
 
-        # 해당 날짜 논문이 없으면 → 해당 날짜 이전 가장 최근 논문
+        # If no papers on target date, use most recent before it
         earlier = [p for p in all_papers if p["date"] <= target_date]
         if earlier:
             latest_date = max(p["date"] for p in earlier)
             return [p for p in earlier if p["date"] == latest_date][:max_papers]
 
-    # target_date가 None이면 가장 최근 날짜
+    # If target_date is None, use most recent date
     latest_date = max(p["date"] for p in all_papers)
     return [p for p in all_papers if p["date"] == latest_date][:max_papers]
 
 
-# ── CLI 테스트 ──
+# ── CLI test ──
 if __name__ == "__main__":
     papers = fetch_latest_dexterous_papers()
     print(f"Found {len(papers)} papers (date: {papers[0]['date'] if papers else 'N/A'})\n")

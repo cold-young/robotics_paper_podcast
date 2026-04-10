@@ -1,12 +1,12 @@
 """
 Dexterous Manipulation Daily Podcast Pipeline
 ==============================================
-arXiv 논문 (robotics_paper_daily) → 한국어 팟캐스트 → GitHub Pages
+arXiv papers (robotics_paper_daily) -> Korean podcast -> GitHub Pages
 
 Usage:
-    python -m pipeline.main                    # 오늘 날짜 기준 실행
-    python -m pipeline.main --date 2026-03-10  # 특정 날짜 실행
-    python -m pipeline.main --dry-run          # 스크립트만 생성 (TTS 생략)
+    python -m pipeline.main                    # Run for today
+    python -m pipeline.main --date 2026-03-10  # Run for specific date
+    python -m pipeline.main --dry-run          # Script only (skip TTS)
 """
 
 import argparse
@@ -39,26 +39,26 @@ def main():
     print(f"  Date: {target_date}")
     print(f"{'='*60}\n")
 
-    # ── Step 1: 논문 수집 ──
+    # ── Step 1: Fetch papers ──
     print("[1/4] Fetching latest Dexterous papers...")
     papers = fetch_latest_dexterous_papers(target_date=target_date, max_papers=args.max_papers)
 
     if not papers:
-        print("  ⚠ No papers found for this date. Exiting.")
+        print("  ! No papers found for this date. Exiting.")
         return
 
-    print(f"  ✓ Found {len(papers)} papers\n")
+    print(f"  + Found {len(papers)} papers\n")
     for i, p in enumerate(papers, 1):
         print(f"    {i}. {p['title'][:70]}...")
 
-    # ── Step 2: 팟캐스트 스크립트 생성 ──
+    # ── Step 2: Generate podcast script ──
     print(f"\n[2/4] Generating Korean podcast script...")
     script = generate_podcast_script(papers, target_date)
 
     script_path = output_dir / f"script_{target_date}.json"
     with open(script_path, "w", encoding="utf-8") as f:
         json.dump(script, f, ensure_ascii=False, indent=2)
-    print(f"  ✓ Script saved to {script_path}")
+    print(f"  + Script saved to {script_path}")
 
     if args.dry_run:
         print("\n[DRY RUN] Skipping TTS and site build.")
@@ -67,13 +67,13 @@ def main():
             print(f"  [{turn['speaker']}] {turn['text'][:80]}...")
         return
 
-    # ── Step 3: 음성 합성 ──
-    print(f"\n[3/4] Synthesizing audio with MeloTTS (Korean)...")
+    # ── Step 3: Synthesize audio ──
+    print(f"\n[3/4] Synthesizing audio with Gemini TTS...")
     audio_path = output_dir / f"episode_{target_date}.mp3"
     synthesize_podcast(script, str(audio_path))
-    print(f"  ✓ Audio saved to {audio_path}")
+    print(f"  + Audio saved to {audio_path}")
 
-    # ── Step 4: 사이트 빌드 ──
+    # ── Step 4: Build site ──
     print(f"\n[4/4] Building podcast site...")
     episode_meta = {
         "date": target_date,
@@ -81,13 +81,13 @@ def main():
         "description": script["description"],
         "papers": [{"title": p["title"], "url": p["url"]} for p in papers],
         "audio_file": f"episodes/episode_{target_date}.mp3",
-        "duration": script.get("estimated_duration", "5-10분"),
+        "duration": script.get("estimated_duration", "5-10 min"),
     }
     build_site(episode_meta, args.site_dir, str(audio_path))
-    print(f"  ✓ Site updated at {args.site_dir}/")
+    print(f"  + Site updated at {args.site_dir}/")
 
     print(f"\n{'='*60}")
-    print(f"  ✅ Pipeline complete!")
+    print(f"  Pipeline complete!")
     print(f"  Audio: {audio_path}")
     print(f"  Site:  {args.site_dir}/index.html")
     print(f"{'='*60}")
