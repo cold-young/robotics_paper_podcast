@@ -88,9 +88,6 @@
     .papers a:hover {
       color: #48cfcb;
     }
-    .papers a::before {
-      content: '📄 ';
-    }
 
     /* ── Episode List ── */
     .episode-list {
@@ -136,12 +133,12 @@
 <body>
   <div class="container">
     <header>
-      <h1>🤖 Dexterous Manipulation Daily</h1>
-      <p>arXiv 논문 기반 한국어 AI 팟캐스트</p>
+      <h1>Dexterous Manipulation Daily</h1>
+      <p>AI-powered Korean podcast from arXiv papers</p>
     </header>
 
     <div class="player" id="player">
-      <div class="player-title" id="player-title">에피소드를 선택하세요</div>
+      <div class="player-title" id="player-title">Select an episode</div>
       <div class="player-date" id="player-date"></div>
       <audio controls id="audio-el">
         <source id="audio-src" src="" type="audio/mpeg">
@@ -149,12 +146,12 @@
       <div class="papers" id="paper-links"></div>
     </div>
 
-    <h2>에피소드 목록</h2>
+    <h2>Episodes</h2>
     <ul class="episode-list" id="episode-list"></ul>
 
     <footer>
       Powered by <a href="https://github.com/cold-young/robotics_paper_daily">robotics_paper_daily</a>
-      + MeloTTS
+      + Gemini TTS
     </footer>
   </div>
 
