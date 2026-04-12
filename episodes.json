@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-04-11",
-    "title": "로봇의 섬세한 손길: 소리와 언어로 완성하는 Dexterous Manipulation",
-    "description": "손재주 조작(Dexterous Manipulation)을 위한 최신 음향 센싱 기술과 3D 가우시안 스플래팅 기반의 언어-동작 연결 논문을 다룹니다.",
+    "date": "2026-04-12",
+    "title": "로봇의 섬세한 손길: A-SLIP과 BLaDA로 알아보는 최신 조작 기술",
+    "description": "손재주 조작(Dexterous Manipulation)을 위한 음향 기반 미끄러짐 예측과 3DGS를 활용한 언어-동작 연결 연구를 다룹니다.",
     "papers": [
       {
         "title": "A-SLIP: Acoustic Sensing for Continuous In-hand Slip Estimation",
@@ -13,8 +13,8 @@
         "url": "http://arxiv.org/abs/2604.08410"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-11.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-04-12.mp3",
+    "duration": "약 4분"
   },
   {
     "date": "2026-04-10",
