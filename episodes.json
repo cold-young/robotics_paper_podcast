@@ -1,20 +1,20 @@
 [
   {
-    "date": "2026-04-12",
-    "title": "로봇의 섬세한 손길: A-SLIP과 BLaDA로 알아보는 최신 조작 기술",
-    "description": "손재주 조작(Dexterous Manipulation)을 위한 음향 기반 미끄러짐 예측과 3DGS를 활용한 언어-동작 연결 연구를 다룹니다.",
+    "date": "2026-04-13",
+    "title": "로봇의 손끝 감각부터 벤치마킹까지: Dexterous Manipulation 정복하기",
+    "description": "로봇 손의 능력을 어떻게 측정할 것인가? 그리고 보이지 않는 물체를 어떻게 만져서 인식할 것인가? 최신 논문 2편을 통해 알아봅니다.",
     "papers": [
       {
-        "title": "A-SLIP: Acoustic Sensing for Continuous In-hand Slip Estimation",
-        "url": "http://arxiv.org/abs/2604.08528"
+        "title": "A Benchmark of Dexterity for Anthropomorphic Robotic Hands",
+        "url": "http://arxiv.org/abs/2604.09294"
       },
       {
-        "title": "BLaDA: Bridging Language to Functional Dexterous Actions within 3DGS Fields",
-        "url": "http://arxiv.org/abs/2604.08410"
+        "title": "TouchAnything: Diffusion-Guided 3D Reconstruction from Sparse Robot Touches",
+        "url": "http://arxiv.org/abs/2604.08945"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-12.mp3",
-    "duration": "약 4분"
+    "audio_file": "episodes/episode_2026-04-13.mp3",
+    "duration": "4분"
   },
   {
     "date": "2026-04-10",
