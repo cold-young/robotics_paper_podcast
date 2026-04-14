@@ -1,19 +1,19 @@
 [
   {
-    "date": "2026-04-13",
-    "title": "로봇의 손끝 감각부터 벤치마킹까지: Dexterous Manipulation 정복하기",
-    "description": "로봇 손의 능력을 어떻게 측정할 것인가? 그리고 보이지 않는 물체를 어떻게 만져서 인식할 것인가? 최신 논문 2편을 통해 알아봅니다.",
+    "date": "2026-04-14",
+    "title": "제 42회 로봇 공학자의 서재: 손끝에서 펼쳐지는 마이크로와 매크로의 세계",
+    "description": "다재다능한 손재주 조작(Dexterous Manipulation)의 최신 연구, 3DGS를 활용한 시뮬레이션 기반 학습과 미세 조작의 세계를 탐구합니다.",
     "papers": [
       {
-        "title": "A Benchmark of Dexterity for Anthropomorphic Robotic Hands",
-        "url": "http://arxiv.org/abs/2604.09294"
+        "title": "ViserDex: Visual Sim-to-Real for Robust Dexterous In-hand Reorientation",
+        "url": "http://arxiv.org/abs/2604.11138"
       },
       {
-        "title": "TouchAnything: Diffusion-Guided 3D Reconstruction from Sparse Robot Touches",
-        "url": "http://arxiv.org/abs/2604.08945"
+        "title": "Micro-Dexterity in Biological Micromanipulation: Embodiment, Perception, and Control",
+        "url": "http://arxiv.org/abs/2604.11640"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-13.mp3",
+    "audio_file": "episodes/episode_2026-04-14.mp3",
     "duration": "4분"
   },
   {
