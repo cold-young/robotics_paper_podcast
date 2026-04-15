@@ -1,20 +1,20 @@
 [
   {
-    "date": "2026-04-14",
-    "title": "제 42회 로봇 공학자의 서재: 손끝에서 펼쳐지는 마이크로와 매크로의 세계",
-    "description": "다재다능한 손재주 조작(Dexterous Manipulation)의 최신 연구, 3DGS를 활용한 시뮬레이션 기반 학습과 미세 조작의 세계를 탐구합니다.",
+    "date": "2026-04-15",
+    "title": "로보틱스 투데이: 꿈꾸는 휴머노이드와 초고속 손재주",
+    "description": "2026년 4월 15일, 휴머노이드의 접촉 학습과 모바일 매니퓰레이터의 고속 파지 기술을 다룹니다.",
     "papers": [
       {
-        "title": "ViserDex: Visual Sim-to-Real for Robust Dexterous In-hand Reorientation",
-        "url": "http://arxiv.org/abs/2604.11138"
+        "title": "Learning Versatile Humanoid Manipulation with Touch Dreaming",
+        "url": "http://arxiv.org/abs/2604.13015"
       },
       {
-        "title": "Micro-Dexterity in Biological Micromanipulation: Embodiment, Perception, and Control",
-        "url": "http://arxiv.org/abs/2604.11640"
+        "title": "FastGrasp: Learning-based Whole-body Control method for Fast Dexterous Grasping with Mobile Manipulators",
+        "url": "http://arxiv.org/abs/2604.12879"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-14.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-04-15.mp3",
+    "duration": "5분"
   },
   {
     "date": "2026-04-10",
