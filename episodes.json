@@ -1,15 +1,19 @@
 [
   {
-    "date": "2026-04-16",
-    "title": "제 42회 로봇 공학자의 방구석 논문 리뷰: 휴머노이드와 모바일 매니퓰레이터의 손맛 살리기",
-    "description": "휴머노이드의 복잡한 전신 조작(Whole-body Manipulation)과 모바일 매니퓰레이터의 빠른 파지(Fast Grasping)를 다룬 최신 논문들을 살펴봅니다.",
+    "date": "2026-04-17",
+    "title": "로봇의 손끝에서 피어나는 데이터의 향연, DEX-Mouse와 HRDexDB",
+    "description": "손재주 조작(Dexterous Manipulation)을 위한 고품질 데이터 수집 도구 DEX-Mouse와 대규모 멀티모달 데이터셋 HRDexDB를 소개합니다.",
     "papers": [
       {
-        "title": "Learning Versatile Humanoid Manipulation with Touch Dreaming** `Dexterous` `Manipulation` `LearnedControl` 🔥 HF#31 <details><summary>Abstract</summary>Humanoid robots promise general-purpose assistance, yet real-world humanoid loco-manipulation remains challenging because it requires whole-body stability, dexterous hands, and contact-aware perception under frequent contact changes. In this work, we study dexterous, contact-rich humanoid loco-manipulation. We first develop an RL-based whole-body controller that provides stable lower-body and...</details> | Ding Zhao Team | [ArXiv](http://arxiv.org/abs/2604.13015) |\n| **2026-04-14** | **FastGrasp: Learning-based Whole-body Control method for Fast Dexterous Grasping with Mobile Manipulators",
-        "url": "http://arxiv.org/abs/2604.12879"
+        "title": "DEX-Mouse: A Low-cost Portable and Universal Interface with Force Feedback for Data Collection of Dexterous Robotic Hands",
+        "url": "http://arxiv.org/abs/2604.15013"
+      },
+      {
+        "title": "HRDexDB: A Large-Scale Dataset of Dexterous Human and Robotic Hand Grasps",
+        "url": "http://arxiv.org/abs/2604.14944"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-16.mp3",
+    "audio_file": "episodes/episode_2026-04-17.mp3",
     "duration": "4분"
   },
   {
