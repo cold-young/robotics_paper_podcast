@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-04-17",
-    "title": "로봇의 손끝에서 피어나는 데이터의 향연, DEX-Mouse와 HRDexDB",
-    "description": "손재주 조작(Dexterous Manipulation)을 위한 고품질 데이터 수집 도구 DEX-Mouse와 대규모 멀티모달 데이터셋 HRDexDB를 소개합니다.",
+    "date": "2026-04-18",
+    "title": "손재주 조작의 미래, 데이터 수집과 방대한 데이터셋의 만남!",
+    "description": "최신 논문 DEX-Mouse와 HRDexDB를 통해 로봇의 손재주 조작(Dexterous Manipulation) 학습을 위한 데이터 수집의 혁신과 대규모 데이터셋의 가치를 알아봅니다.",
     "papers": [
       {
         "title": "DEX-Mouse: A Low-cost Portable and Universal Interface with Force Feedback for Data Collection of Dexterous Robotic Hands",
@@ -13,7 +13,7 @@
         "url": "http://arxiv.org/abs/2604.14944"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-17.mp3",
+    "audio_file": "episodes/episode_2026-04-18.mp3",
     "duration": "4분"
   },
   {
