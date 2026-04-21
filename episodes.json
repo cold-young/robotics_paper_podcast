@@ -1,19 +1,15 @@
 [
   {
-    "date": "2026-04-20",
-    "title": "로봇 손의 미래, 손재주 조작(Dexterous Manipulation) 정복하기!",
-    "description": "데이터 수집의 혁신을 가져올 DEX-Mouse와 방대한 데이터를 담은 HRDexDB를 통해 로봇 조작의 한계를 넘어서는 방법을 알아봅니다.",
+    "date": "2026-04-21",
+    "title": "좁은 틈새도 문제없어! SpaceDex와 함께하는 손재주 조작의 세계",
+    "description": "복잡한 환경에서의 손재주 조작(Dexterous Manipulation)을 다룬 최신 논문 'SpaceDex'를 통해 로봇이 어떻게 좁은 공간을 정복하는지 알아봅니다.",
     "papers": [
       {
-        "title": "DEX-Mouse: A Low-cost Portable and Universal Interface with Force Feedback for Data Collection of Dexterous Robotic Hands",
-        "url": "http://arxiv.org/abs/2604.15013"
-      },
-      {
-        "title": "HRDexDB: A Large-Scale Dataset of Dexterous Human and Robotic Hand Grasps",
-        "url": "http://arxiv.org/abs/2604.14944"
+        "title": "SpaceDex: Generalizable Dexterous Grasping in Tiered Workspaces",
+        "url": "http://arxiv.org/abs/2604.17888"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-20.mp3",
+    "audio_file": "episodes/episode_2026-04-21.mp3",
     "duration": "4분"
   },
   {
