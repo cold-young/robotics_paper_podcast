@@ -1,16 +1,24 @@
 [
   {
-    "date": "2026-04-22",
-    "title": "좁은 틈새도 문제없어! SpaceDex로 완성하는 정교한 조작",
-    "description": "다자유도 로봇 손의 난제인 계층적 작업 공간에서의 조작 문제를 해결한 SpaceDex 논문을 리뷰합니다.",
+    "date": "2026-04-23",
+    "title": "로봇의 섬세한 손길을 찾아서: Dexterous Manipulation 특집",
+    "description": "최신 논문을 통해 본 로봇 손재주 조작(Dexterous Manipulation)의 현재와 미래, 비전-촉각 센싱부터 시뮬레이션까지!",
     "papers": [
       {
-        "title": "SpaceDex: Generalizable Dexterous Grasping in Tiered Workspaces",
-        "url": "http://arxiv.org/abs/2604.17888"
+        "title": "DeVI: Physics-based Dexterous Human-Object Interaction via Synthetic Video Imitation** `Dexterous` `Manipulation` 🔥 HF#1 <details><summary>Abstract</summary>Recent advances in video generative models enable the synthesis of realistic human-object interaction videos across a wide range of scenarios and object categories, including complex dexterous manipulations that are difficult to capture with motion capture systems. While the rich interaction knowledge embedded in these synthetic videos holds strong potential for motion planning in dexterous...</details> | Hanbyul Joo Team | [ArXiv](http://arxiv.org/abs/2604.20841) / [Web](https://snuvclab.github.io/devi/) |\n| **2026-04-22** | **FingerEye: Continuous and Unified Vision-Tactile Sensing for Dexterous Manipulation",
+        "url": "http://arxiv.org/abs/2604.20689"
+      },
+      {
+        "title": "VTouch++: A Multimodal Dataset with Vision-Based Tactile Enhancement for Bimanual Manipulation",
+        "url": "http://arxiv.org/abs/2604.20444"
+      },
+      {
+        "title": "ETac: A Lightweight and Efficient Tactile Simulation Framework for Learning Dexterous Manipulation",
+        "url": "http://arxiv.org/abs/2604.20295"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-22.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-04-23.mp3",
+    "duration": "6분"
   },
   {
     "date": "2026-04-10",
