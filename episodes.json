@@ -1,24 +1,20 @@
 [
   {
-    "date": "2026-04-23",
-    "title": "로봇의 섬세한 손길을 찾아서: Dexterous Manipulation 특집",
-    "description": "최신 논문을 통해 본 로봇 손재주 조작(Dexterous Manipulation)의 현재와 미래, 비전-촉각 센싱부터 시뮬레이션까지!",
+    "date": "2026-04-24",
+    "title": "바퀴 달린 휴머노이드부터 손끝 시각 지능까지: Dexterous Manipulation의 새로운 지평",
+    "description": "최신 로보틱스 논문 X2-N과 FingerViP을 통해 이동성과 정밀 조작의 최신 트렌드를 알아봅니다.",
     "papers": [
       {
-        "title": "DeVI: Physics-based Dexterous Human-Object Interaction via Synthetic Video Imitation** `Dexterous` `Manipulation` 🔥 HF#1 <details><summary>Abstract</summary>Recent advances in video generative models enable the synthesis of realistic human-object interaction videos across a wide range of scenarios and object categories, including complex dexterous manipulations that are difficult to capture with motion capture systems. While the rich interaction knowledge embedded in these synthetic videos holds strong potential for motion planning in dexterous...</details> | Hanbyul Joo Team | [ArXiv](http://arxiv.org/abs/2604.20841) / [Web](https://snuvclab.github.io/devi/) |\n| **2026-04-22** | **FingerEye: Continuous and Unified Vision-Tactile Sensing for Dexterous Manipulation",
-        "url": "http://arxiv.org/abs/2604.20689"
+        "title": "X2-N: A Transformable Wheel-legged Humanoid Robot with Dual-mode Locomotion and Manipulation",
+        "url": "http://arxiv.org/abs/2604.21541"
       },
       {
-        "title": "VTouch++: A Multimodal Dataset with Vision-Based Tactile Enhancement for Bimanual Manipulation",
-        "url": "http://arxiv.org/abs/2604.20444"
-      },
-      {
-        "title": "ETac: A Lightweight and Efficient Tactile Simulation Framework for Learning Dexterous Manipulation",
-        "url": "http://arxiv.org/abs/2604.20295"
+        "title": "FingerViP: Learning Real-World Dexterous Manipulation with Fingertip Visual Perception",
+        "url": "http://arxiv.org/abs/2604.21331"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-23.mp3",
-    "duration": "6분"
+    "audio_file": "episodes/episode_2026-04-24.mp3",
+    "duration": "4분"
   },
   {
     "date": "2026-04-10",
