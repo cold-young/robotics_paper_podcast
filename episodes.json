@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-04-25",
-    "title": "제42화: 바퀴 달린 휴머노이드와 손끝에 달린 눈",
-    "description": "변형 가능한 바퀴형 휴머노이드 X2-N과 손끝 시각 정보를 활용한 FingerViP 논문을 통해 로봇의 이동성과 조작 능력의 최신 트렌드를 알아봅니다.",
+    "date": "2026-04-26",
+    "title": "로보틱스 멍냥이: 바퀴 달린 휴머노이드와 손가락 끝의 눈",
+    "description": "바퀴와 다리의 장점을 합친 X2-N 로봇과 손가락 끝 시각 정보를 활용하는 FingerViP 기술을 소개합니다.",
     "papers": [
       {
         "title": "X2-N: A Transformable Wheel-legged Humanoid Robot with Dual-mode Locomotion and Manipulation",
@@ -13,8 +13,8 @@
         "url": "http://arxiv.org/abs/2604.21331"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-25.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-04-26.mp3",
+    "duration": "5분"
   },
   {
     "date": "2026-04-10",
