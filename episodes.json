@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-04-26",
-    "title": "로보틱스 멍냥이: 바퀴 달린 휴머노이드와 손가락 끝의 눈",
-    "description": "바퀴와 다리의 장점을 합친 X2-N 로봇과 손가락 끝 시각 정보를 활용하는 FingerViP 기술을 소개합니다.",
+    "date": "2026-04-27",
+    "title": "바퀴 달린 로봇부터 손가락 끝의 눈까지! 최신 조작 기술 탐구",
+    "description": "변신하는 이족보행 로봇 X2-N과 손가락 끝에 시각을 더한 FingerViP 논문을 통해 Dexterous Manipulation의 현재를 알아봅니다.",
     "papers": [
       {
         "title": "X2-N: A Transformable Wheel-legged Humanoid Robot with Dual-mode Locomotion and Manipulation",
@@ -13,8 +13,8 @@
         "url": "http://arxiv.org/abs/2604.21331"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-26.mp3",
-    "duration": "5분"
+    "audio_file": "episodes/episode_2026-04-27.mp3",
+    "duration": "4분"
   },
   {
     "date": "2026-04-10",
