@@ -1,19 +1,15 @@
 [
   {
-    "date": "2026-04-27",
-    "title": "바퀴 달린 로봇부터 손가락 끝의 눈까지! 최신 조작 기술 탐구",
-    "description": "변신하는 이족보행 로봇 X2-N과 손가락 끝에 시각을 더한 FingerViP 논문을 통해 Dexterous Manipulation의 현재를 알아봅니다.",
+    "date": "2026-04-28",
+    "title": "촉각 센서의 마법, SPLIT을 소개합니다!",
+    "description": "이미지 기반 촉각 센서의 시뮬레이션을 혁신하는 SPLIT 논문을 통해 로봇 손재주 조작의 미래를 살펴봅니다.",
     "papers": [
       {
-        "title": "X2-N: A Transformable Wheel-legged Humanoid Robot with Dual-mode Locomotion and Manipulation",
-        "url": "http://arxiv.org/abs/2604.21541"
-      },
-      {
-        "title": "FingerViP: Learning Real-World Dexterous Manipulation with Fingertip Visual Perception",
-        "url": "http://arxiv.org/abs/2604.21331"
+        "title": "SPLIT: Separating Physical-Contact via Latent Arithmetic in Image-Based Tactile Sensors",
+        "url": "http://arxiv.org/abs/2604.24449"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-27.mp3",
+    "audio_file": "episodes/episode_2026-04-28.mp3",
     "duration": "4분"
   },
   {
