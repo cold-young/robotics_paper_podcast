@@ -1,15 +1,15 @@
 [
   {
-    "date": "2026-04-28",
+    "date": "2026-04-29",
     "title": "촉각 센서의 마법, SPLIT을 소개합니다!",
-    "description": "이미지 기반 촉각 센서의 시뮬레이션을 혁신하는 SPLIT 논문을 통해 로봇 손재주 조작의 미래를 살펴봅니다.",
+    "description": "이미지 기반 촉각 센서 시뮬레이션의 난제를 해결한 SPLIT 논문을 통해 로봇의 손재주 조작 연구를 살펴봅니다.",
     "papers": [
       {
         "title": "SPLIT: Separating Physical-Contact via Latent Arithmetic in Image-Based Tactile Sensors",
         "url": "http://arxiv.org/abs/2604.24449"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-28.mp3",
+    "audio_file": "episodes/episode_2026-04-29.mp3",
     "duration": "4분"
   },
   {
