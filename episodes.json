@@ -1,15 +1,19 @@
 [
   {
-    "date": "2026-04-29",
-    "title": "촉각 센서의 마법, SPLIT을 소개합니다!",
-    "description": "이미지 기반 촉각 센서 시뮬레이션의 난제를 해결한 SPLIT 논문을 통해 로봇의 손재주 조작 연구를 살펴봅니다.",
+    "date": "2026-04-30",
+    "title": "로봇의 섬세한 손길, 그리고 새로운 촉각의 세계",
+    "description": "3D 프린팅 인공 피부와 자원 인지형 손재주 조작(Dexterous Manipulation)에 관한 최신 연구들을 다룹니다.",
     "papers": [
       {
-        "title": "SPLIT: Separating Physical-Contact via Latent Arithmetic in Image-Based Tactile Sensors",
-        "url": "http://arxiv.org/abs/2604.24449"
+        "title": "Improving Sensing Coverage and Compliance of 3D-Printed Artificial Skins Through Multi-Modal Sensing and Soft Materials",
+        "url": "http://arxiv.org/abs/2604.25563"
+      },
+      {
+        "title": "HANDFUL: Sequential Grasp-Conditioned Dexterous Manipulation with Resource Awareness",
+        "url": "http://arxiv.org/abs/2604.25126"
       }
     ],
-    "audio_file": "episodes/episode_2026-04-29.mp3",
+    "audio_file": "episodes/episode_2026-04-30.mp3",
     "duration": "4분"
   },
   {
