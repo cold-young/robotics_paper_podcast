@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-05-01",
-    "title": "손끝의 감각과 설계의 미학: 오늘 본 Dexterous Manipulation 논문들",
-    "description": "저렴한 촉각 센서 FlexiTac과 로봇 손의 구조를 최적화하는 새로운 설계 프레임워크를 다룹니다.",
+    "date": "2026-05-02",
+    "title": "제12회: 손끝의 감각부터 손의 구조까지, 로봇 손의 진화",
+    "description": "최신 Dexterous Manipulation 논문인 FlexiTac과 Function-based Co-Design 최적화 연구를 통해 로봇 손의 하드웨어와 감각의 미래를 탐구합니다.",
     "papers": [
       {
         "title": "FlexiTac: A Low-Cost, Open-Source, Scalable Tactile Sensing Solution for Robotic Systems",
@@ -13,7 +13,7 @@
         "url": "http://arxiv.org/abs/2604.27557"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-01.mp3",
+    "audio_file": "episodes/episode_2026-05-02.mp3",
     "duration": "4분"
   },
   {
