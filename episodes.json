@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-05-03",
-    "title": "로봇의 손끝 감각부터 설계까지, Dexterous Manipulation 완전 정복!",
-    "description": "최신 논문 FlexiTac과 Function-based Parametric Co-Design을 통해 로봇 손의 촉각 센서와 설계 최적화 트렌드를 알아봅니다.",
+    "date": "2026-05-04",
+    "title": "로봇의 손끝 감각부터 설계, 그리고 데이터 생성까지! 오늘 우리가 주목할 논문 3선",
+    "description": "최신 Dexterous Manipulation 논문 3편을 통해 로봇 손의 촉각 센서, 설계 최적화, 그리고 XR 기반 데이터 엔진의 현재와 미래를 알아봅니다.",
     "papers": [
       {
         "title": "FlexiTac: A Low-Cost, Open-Source, Scalable Tactile Sensing Solution for Robotic Systems",
@@ -11,10 +11,14 @@
       {
         "title": "Function-based Parametric Co-Design Optimization of Dexterous Hands",
         "url": "http://arxiv.org/abs/2604.27557"
+      },
+      {
+        "title": "Lucid-XR: An Extended-Reality Data Engine for Robotic Manipulation",
+        "url": "http://arxiv.org/abs/2605.00244"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-03.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-05-04.mp3",
+    "duration": "6분"
   },
   {
     "date": "2026-04-10",
