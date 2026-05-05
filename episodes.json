@@ -1,24 +1,16 @@
 [
   {
-    "date": "2026-05-04",
-    "title": "로봇의 손끝 감각부터 설계, 그리고 데이터 생성까지! 오늘 우리가 주목할 논문 3선",
-    "description": "최신 Dexterous Manipulation 논문 3편을 통해 로봇 손의 촉각 센서, 설계 최적화, 그리고 XR 기반 데이터 엔진의 현재와 미래를 알아봅니다.",
+    "date": "2026-05-05",
+    "title": "로봇 손의 신경망을 잇다! 초고속 센서 읽기 기술",
+    "description": "복잡한 배선 문제를 해결한 로봇 손의 새로운 센서 읽기 아키텍처, Shift-Register Multiplexing 논문을 파헤쳐 봅니다.",
     "papers": [
       {
-        "title": "FlexiTac: A Low-Cost, Open-Source, Scalable Tactile Sensing Solution for Robotic Systems",
-        "url": "http://arxiv.org/abs/2604.28156"
-      },
-      {
-        "title": "Function-based Parametric Co-Design Optimization of Dexterous Hands",
-        "url": "http://arxiv.org/abs/2604.27557"
-      },
-      {
-        "title": "Lucid-XR: An Extended-Reality Data Engine for Robotic Manipulation",
-        "url": "http://arxiv.org/abs/2605.00244"
+        "title": "High-Speed, Scalable Sensor Readout for Dexterous Robotic Hands via Shift-Register Multiplexing",
+        "url": "http://arxiv.org/abs/2605.01434"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-04.mp3",
-    "duration": "6분"
+    "audio_file": "episodes/episode_2026-05-05.mp3",
+    "duration": "4분"
   },
   {
     "date": "2026-04-10",
