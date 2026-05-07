@@ -1,16 +1,16 @@
 [
   {
-    "date": "2026-05-06",
-    "title": "로봇의 섬세한 손길, RLDX-1을 만나다",
-    "description": "진우 신 교수님 팀의 RLDX-1 기술 보고서를 통해 Vision-Language-Action 모델이 어떻게 복잡한 손재주 조작(Dexterous Manipulation)을 해결하는지 알아봅니다.",
+    "date": "2026-05-07",
+    "title": "제42화: 촉각의 신세계! 고해상도 촉각 시뮬레이션을 위한 신경망 모델링",
+    "description": "복잡한 촉각 시뮬레이션의 계산 비용을 획기적으로 줄인 'Reduced-order Neural Modeling' 논문을 소개합니다.",
     "papers": [
       {
-        "title": "RLDX-1 Technical Report",
-        "url": "http://arxiv.org/abs/2605.03269"
+        "title": "Reduced-order Neural Modeling with Differentiable Simulation for High-Detail Tactile Perception",
+        "url": "http://arxiv.org/abs/2605.05053"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-06.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-05-07.mp3",
+    "duration": "약 4분"
   },
   {
     "date": "2026-04-10",
