@@ -1,16 +1,20 @@
 [
   {
-    "date": "2026-05-07",
-    "title": "제42화: 촉각의 신세계! 고해상도 촉각 시뮬레이션을 위한 신경망 모델링",
-    "description": "복잡한 촉각 시뮬레이션의 계산 비용을 획기적으로 줄인 'Reduced-order Neural Modeling' 논문을 소개합니다.",
+    "date": "2026-05-08",
+    "title": "제 42회: 손끝의 마법, 촉각과 모션의 새로운 패러다임",
+    "description": "전자 장치 없는 촉각 센서 'TouchDrive'와 인간의 움직임을 로봇 손으로 옮기는 'DexSynRefine'을 다룹니다.",
     "papers": [
       {
-        "title": "Reduced-order Neural Modeling with Differentiable Simulation for High-Detail Tactile Perception",
-        "url": "http://arxiv.org/abs/2605.05053"
+        "title": "TouchDrive: Electronics-Free Tactile Sensing Interface for Assistive Grasping",
+        "url": "http://arxiv.org/abs/2605.06432"
+      },
+      {
+        "title": "DexSynRefine: Synthesizing and Refining Human-Object Interaction Motion for Physically Feasible Dexterous Robot Actions",
+        "url": "http://arxiv.org/abs/2605.05925"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-07.mp3",
-    "duration": "약 4분"
+    "audio_file": "episodes/episode_2026-05-08.mp3",
+    "duration": "4분"
   },
   {
     "date": "2026-04-10",
