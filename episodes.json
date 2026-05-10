@@ -1,8 +1,8 @@
 [
   {
-    "date": "2026-05-09",
-    "title": "로봇의 섬세한 손길: TouchDrive와 DexSynRefine 탐구",
-    "description": "전자 장치 없는 촉각 인터페이스 TouchDrive와 인간의 움직임을 로봇으로 옮기는 DexSynRefine 논문을 다룹니다.",
+    "date": "2026-05-10",
+    "title": "제42화: 전선 없이 느끼고, 사람처럼 움직이고! 손재주 조작의 미래",
+    "description": "복잡한 센서 없이 감각을 구현하는 TouchDrive와 인간의 움직임을 로봇에게 입히는 DexSynRefine을 소개합니다.",
     "papers": [
       {
         "title": "TouchDrive: Electronics-Free Tactile Sensing Interface for Assistive Grasping",
@@ -13,7 +13,7 @@
         "url": "http://arxiv.org/abs/2605.05925"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-09.mp3",
+    "audio_file": "episodes/episode_2026-05-10.mp3",
     "duration": "4분"
   },
   {
