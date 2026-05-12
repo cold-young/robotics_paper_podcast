@@ -1,19 +1,19 @@
 [
   {
-    "date": "2026-05-11",
-    "title": "제12회: 전기가 필요 없는 촉각 센서와 인간의 움직임을 로봇에게로!",
-    "description": "전자기기 없이 작동하는 기발한 촉각 센서 'TouchDrive'와 인간의 손동작을 로봇의 손재주로 변환하는 'DexSynRefine'을 소개합니다.",
+    "date": "2026-05-12",
+    "title": "제12회: 손끝에서 시작되는 로봇의 미래, Dexterous Manipulation 특집",
+    "description": "복잡한 물리 환경에서의 반응형 캐칭과 리테일 현장을 위한 데이터셋 전략을 다룹니다.",
     "papers": [
       {
-        "title": "TouchDrive: Electronics-Free Tactile Sensing Interface for Assistive Grasping",
-        "url": "http://arxiv.org/abs/2605.06432"
+        "title": "Zero-Shot Sim-to-Real Robot Learning: A Dexterous Manipulation Study on Reactive Catching",
+        "url": "http://arxiv.org/abs/2605.09789"
       },
       {
-        "title": "DexSynRefine: Synthesizing and Refining Human-Object Interaction Motion for Physically Feasible Dexterous Robot Actions",
-        "url": "http://arxiv.org/abs/2605.05925"
+        "title": "SABER: A Scalable Action-Based Embodied Dataset for Real-World VLA Adaptation",
+        "url": "http://arxiv.org/abs/2605.09613"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-11.mp3",
+    "audio_file": "episodes/episode_2026-05-12.mp3",
     "duration": "4분"
   },
   {
