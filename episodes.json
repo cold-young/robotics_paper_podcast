@@ -1,19 +1,15 @@
 [
   {
-    "date": "2026-05-12",
-    "title": "제12회: 손끝에서 시작되는 로봇의 미래, Dexterous Manipulation 특집",
-    "description": "복잡한 물리 환경에서의 반응형 캐칭과 리테일 현장을 위한 데이터셋 전략을 다룹니다.",
+    "date": "2026-05-13",
+    "title": "제 42회: 손가락 끝에서 시작되는 회전의 미학, DexTwist!",
+    "description": "MR 기반 원격 조작에서 회전 동작을 완벽하게 재현하는 'DexTwist' 논문을 다룹니다.",
     "papers": [
       {
-        "title": "Zero-Shot Sim-to-Real Robot Learning: A Dexterous Manipulation Study on Reactive Catching",
-        "url": "http://arxiv.org/abs/2605.09789"
-      },
-      {
-        "title": "SABER: A Scalable Action-Based Embodied Dataset for Real-World VLA Adaptation",
-        "url": "http://arxiv.org/abs/2605.09613"
+        "title": "DexTwist: Dexterous Hand Retargeting for Twist Motion via Mixed Reality-based Teleoperation",
+        "url": "http://arxiv.org/abs/2605.12182"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-12.mp3",
+    "audio_file": "episodes/episode_2026-05-13.mp3",
     "duration": "4분"
   },
   {
