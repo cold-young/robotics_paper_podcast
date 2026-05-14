@@ -1,15 +1,15 @@
 [
   {
-    "date": "2026-05-13",
-    "title": "제 42회: 손가락 끝에서 시작되는 회전의 미학, DexTwist!",
-    "description": "MR 기반 원격 조작에서 회전 동작을 완벽하게 재현하는 'DexTwist' 논문을 다룹니다.",
+    "date": "2026-05-14",
+    "title": "내 손끝의 감각을 영상으로? TouchAnything 논문 리뷰",
+    "description": "사람의 1인칭 시점 영상에서 촉각 정보를 추론하는 새로운 프레임워크, TouchAnything을 소개합니다.",
     "papers": [
       {
-        "title": "DexTwist: Dexterous Hand Retargeting for Twist Motion via Mixed Reality-based Teleoperation",
-        "url": "http://arxiv.org/abs/2605.12182"
+        "title": "TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video",
+        "url": "http://arxiv.org/abs/2605.13083"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-13.mp3",
+    "audio_file": "episodes/episode_2026-05-14.mp3",
     "duration": "4분"
   },
   {
