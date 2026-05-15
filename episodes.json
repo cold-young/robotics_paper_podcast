@@ -1,15 +1,15 @@
 [
   {
-    "date": "2026-05-14",
-    "title": "내 손끝의 감각을 영상으로? TouchAnything 논문 리뷰",
-    "description": "사람의 1인칭 시점 영상에서 촉각 정보를 추론하는 새로운 프레임워크, TouchAnything을 소개합니다.",
+    "date": "2026-05-15",
+    "title": "로봇 손의 완벽한 손맛을 찾아서: Hand-in-the-Loop",
+    "description": "복잡한 손재주 조작(Dexterous Manipulation) 환경에서 VLA 모델의 오류를 실시간으로 교정하는 최신 연구를 다룹니다.",
     "papers": [
       {
-        "title": "TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video",
-        "url": "http://arxiv.org/abs/2605.13083"
+        "title": "Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction",
+        "url": "http://arxiv.org/abs/2605.15157"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-14.mp3",
+    "audio_file": "episodes/episode_2026-05-15.mp3",
     "duration": "4분"
   },
   {
