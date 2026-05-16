@@ -1,15 +1,15 @@
 [
   {
-    "date": "2026-05-15",
-    "title": "로봇 손의 완벽한 손맛을 찾아서: Hand-in-the-Loop",
-    "description": "복잡한 손재주 조작(Dexterous Manipulation) 환경에서 VLA 모델의 오류를 실시간으로 교정하는 최신 연구를 다룹니다.",
+    "date": "2026-05-16",
+    "title": "로봇 손의 엉뚱한 실수, 사람이 직접 고쳐준다면? - 'Hand-in-the-Loop' 리뷰",
+    "description": "복잡한 손재주 조작(Dexterous Manipulation)에서 VLA 모델의 누적 오차를 인간의 개입으로 보정하는 'Hand-in-the-Loop' 논문을 다룹니다.",
     "papers": [
       {
         "title": "Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction",
         "url": "http://arxiv.org/abs/2605.15157"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-15.mp3",
+    "audio_file": "episodes/episode_2026-05-16.mp3",
     "duration": "4분"
   },
   {
