@@ -1,15 +1,15 @@
 [
   {
-    "date": "2026-05-23",
-    "title": "제12회: 로봇 손의 실수, 사람이 직접 고쳐준다고?",
-    "description": "Vision-Language-Action 모델의 고질적인 문제인 오차 누적을 실시간 인간 개입으로 해결하는 'Hand-in-the-Loop' 논문을 살펴봅니다.",
+    "date": "2026-05-24",
+    "title": "제12회: 로봇 손이 실수할 때, 사람이 직접 개입한다면? 'Hand-in-the-Loop' 리뷰",
+    "description": "고차원 로봇 손 제어의 난제인 '오차 누적' 문제를 해결하기 위한 새로운 인터벤션 프레임워크, Hand-in-the-Loop 논문을 살펴봅니다.",
     "papers": [
       {
         "title": "Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction",
         "url": "http://arxiv.org/abs/2605.15157"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-23.mp3",
+    "audio_file": "episodes/episode_2026-05-24.mp3",
     "duration": "4분"
   },
   {
