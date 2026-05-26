@@ -19,7 +19,7 @@ import wave
 from pathlib import Path
 
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "").strip()
-TTS_MODEL = "gemini-2.5-flash-tts"
+TTS_MODEL = "gemini-2.5-flash-preview-tts"
 TTS_ENDPOINT = (
     f"https://generativelanguage.googleapis.com/v1beta/models/{TTS_MODEL}:generateContent"
 )
