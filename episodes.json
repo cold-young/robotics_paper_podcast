@@ -1,16 +1,16 @@
 [
   {
-    "date": "2026-05-24",
-    "title": "제12회: 로봇 손이 실수할 때, 사람이 직접 개입한다면? 'Hand-in-the-Loop' 리뷰",
-    "description": "고차원 로봇 손 제어의 난제인 '오차 누적' 문제를 해결하기 위한 새로운 인터벤션 프레임워크, Hand-in-the-Loop 논문을 살펴봅니다.",
+    "date": "2026-05-26",
+    "title": "사람과 로봇 손의 완벽한 듀엣, Hand-in-the-Loop",
+    "description": "고도화된 손재주 조작(Dexterous Manipulation)을 위해 VLA 모델에 사람이 매끄럽게 개입하여 학습시키는 새로운 프레임워크를 소개합니다.",
     "papers": [
       {
         "title": "Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction",
         "url": "http://arxiv.org/abs/2605.15157"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-24.mp3",
-    "duration": "4분"
+    "audio_file": "episodes/episode_2026-05-26.mp3",
+    "duration": "2분"
   },
   {
     "date": "2026-04-10",
