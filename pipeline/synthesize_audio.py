@@ -18,8 +18,8 @@ import urllib.error
 import wave
 from pathlib import Path
 
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
-TTS_MODEL = "gemini-2.5-flash-preview-tts"
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "").strip()
+TTS_MODEL = "gemini-2.5-flash-tts"
 TTS_ENDPOINT = (
     f"https://generativelanguage.googleapis.com/v1beta/models/{TTS_MODEL}:generateContent"
 )
@@ -191,6 +191,11 @@ def synthesize_podcast(script: dict, output_path: str) -> str:
     # Extract speakers present in the script
     speakers_in_script = set(turn["speaker"] for turn in dialogue)
     voices = {s: SPEAKER_VOICES.get(s, "Kore") for s in speakers_in_script}
+
+    # Gemini TTS multi-speaker requires EXACTLY 2 voices.
+    # Always provide both configured speakers regardless of script content.
+    if len(voices) < 2:
+        voices = dict(SPEAKER_VOICES)
 
     # Split dialogue into chunks
     chunks = _chunk_dialogue(dialogue)

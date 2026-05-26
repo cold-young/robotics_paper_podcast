@@ -22,11 +22,11 @@ import urllib.error
 from typing import Any
 
 # ── Config ──
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
-LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai")
-LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-2.5-flash")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "").strip()
+LLM_BASE_URL = os.environ.get("LLM_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai").strip()
+LLM_MODEL = os.environ.get("LLM_MODEL", "gemini-2.5-flash").strip()
 # Fallback models (tried in order if primary model fails)
-LLM_FALLBACK_MODELS = os.environ.get("LLM_FALLBACK_MODELS", "gemini-3.5-flash,gemini-2.5-flash-lite").split(",")
+LLM_FALLBACK_MODELS = [m.strip() for m in os.environ.get("LLM_FALLBACK_MODELS", "gemini-3.5-flash,gemini-2.5-flash-lite").split(",")]
 
 MAX_RETRIES = 3
 RETRY_DELAY = 5  # seconds

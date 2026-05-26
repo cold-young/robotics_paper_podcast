@@ -34,9 +34,9 @@ from pipeline.generate_script import _call_llm
 
 # ── Config ──────────────────────────────────────────────────────────────────
 
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
-LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "").strip()
 
 TLDR_SYSTEM_PROMPT = """\
 당신은 로보틱스 분야 전문 연구원입니다.

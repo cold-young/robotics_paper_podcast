@@ -42,7 +42,7 @@ def main():
     print(f"{'='*60}\n")
 
     # ── Step 1: Fetch papers ──
-    print("[1/4] Fetching latest Dexterous papers...")
+    print("[1/5] Fetching latest Dexterous papers...")
     papers = fetch_latest_dexterous_papers(target_date=target_date, max_papers=args.max_papers)
 
     if not papers:
@@ -54,7 +54,7 @@ def main():
         print(f"    {i}. {p['title'][:70]}...")
 
     # ── Step 2: Generate podcast script ──
-    print(f"\n[2/4] Generating Korean podcast script...")
+    print(f"\n[2/5] Generating Korean podcast script...")
     script = generate_podcast_script(papers, target_date)
 
     script_path = output_dir / f"script_{target_date}.json"
@@ -67,41 +67,62 @@ def main():
         print("\n--- Script Preview ---")
         for turn in script["dialogue"][:6]:
             print(f"  [{turn['speaker']}] {turn['text'][:80]}...")
+        # Still send Telegram even in dry-run (unless --no-telegram)
+        _run_telegram(args, target_date)
         return
 
-    # ── Step 3: Synthesize audio ──
-    print(f"\n[3/4] Synthesizing audio with Gemini TTS...")
-    audio_path = output_dir / f"episode_{target_date}.mp3"
-    synthesize_podcast(script, str(audio_path))
-    print(f"  + Audio saved to {audio_path}")
+    # ── Steps 3-4: Podcast generation (may fail independently of Telegram) ──
+    podcast_error = None
+    try:
+        # ── Step 3: Synthesize audio ──
+        print(f"\n[3/5] Synthesizing audio with Gemini TTS...")
+        audio_path = output_dir / f"episode_{target_date}.mp3"
+        synthesize_podcast(script, str(audio_path))
+        print(f"  + Audio saved to {audio_path}")
 
-    # ── Step 4: Build site ──
-    print(f"\n[4/4] Building podcast site...")
-    episode_meta = {
-        "date": target_date,
-        "title": script["title"],
-        "description": script["description"],
-        "papers": [{"title": p["title"], "url": p["url"]} for p in papers],
-        "audio_file": f"episodes/episode_{target_date}.mp3",
-        "duration": script.get("estimated_duration", "5-10 min"),
-    }
-    build_site(episode_meta, args.site_dir, str(audio_path))
-    print(f"  + Site updated at {args.site_dir}/")
+        # ── Step 4: Build site ──
+        print(f"\n[4/5] Building podcast site...")
+        episode_meta = {
+            "date": target_date,
+            "title": script["title"],
+            "description": script["description"],
+            "papers": [{"title": p["title"], "url": p["url"]} for p in papers],
+            "audio_file": f"episodes/episode_{target_date}.mp3",
+            "duration": script.get("estimated_duration", "5-10 min"),
+        }
+        build_site(episode_meta, args.site_dir, str(audio_path))
+        print(f"  + Site updated at {args.site_dir}/")
 
-    print(f"\n{'='*60}")
-    print(f"  Pipeline complete!")
-    print(f"  Audio: {audio_path}")
-    print(f"  Site:  {args.site_dir}/index.html")
-    print(f"{'='*60}")
+        print(f"\n  Podcast pipeline complete!")
+        print(f"  Audio: {audio_path}")
+        print(f"  Site:  {args.site_dir}/index.html")
 
-    # ── Step 5: Telegram notification ──
-    if not args.no_telegram:
-        print(f"\n[5/5] Sending Telegram notifications...")
+    except Exception as e:
+        podcast_error = e
+        print(f"\n  ⚠ Podcast generation failed: {e}")
+        print(f"  Continuing to Telegram notification...\n")
+
+    # ── Step 5: Telegram notification (always runs) ──
+    _run_telegram(args, target_date)
+
+    # Re-raise podcast error so GitHub Actions marks the job as failed
+    if podcast_error:
+        raise podcast_error
+
+
+def _run_telegram(args, target_date: str):
+    """Run Telegram notification step."""
+    if args.no_telegram:
+        print("\n[5/5] Telegram notification skipped (--no-telegram)")
+        return
+
+    print(f"\n[5/5] Sending Telegram notifications...")
+    try:
         tg_papers = fetch_latest_papers(target_date=target_date)
         actual_date = tg_papers[0]["date"] if tg_papers else target_date
         send_paper_updates(tg_papers, actual_date)
-    else:
-        print("\n[5/5] Telegram notification skipped (--no-telegram)")
+    except Exception as e:
+        print(f"  ⚠ Telegram notification failed: {e}")
 
 
 if __name__ == "__main__":
