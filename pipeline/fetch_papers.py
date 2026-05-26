@@ -154,13 +154,161 @@ def fetch_latest_dexterous_papers(
     return [p for p in all_papers if p["date"] == latest_date][:max_papers]
 
 
+# ── Multi-section parsing (used by send_telegram) ──────────────────────────
+
+# Robotics-relevant sections (excludes HuggingFace Hot Papers)
+ROBOTICS_SECTIONS = ["Dexterous", "Manipulation", "VLA", "Tactile", "Sim2Real", "LearnedControl"]
+
+
+def parse_all_sections(readme: str) -> list[dict]:
+    """
+    Parse paper rows from ALL sections of the README.
+
+    Unlike parse_dexterous_section(), this scans every line and records
+    which '## Section' header it falls under, plus any inline backtick tags.
+
+    Returns:
+        list of dict with keys: date, title, abstract, authors, url, web, tags, section
+    """
+    papers = []
+    current_section = ""
+
+    for line in readme.split("\n"):
+        # Detect section headers (## Dexterous, ## 🔥 HuggingFace Hot Papers, etc.)
+        sec_match = re.match(r"^##\s+(.+)$", line.strip())
+        if sec_match:
+            current_section = sec_match.group(1).strip()
+            continue
+
+        # Paper row: must have a date and <details> tag
+        date_match = re.search(r"\*\*(\d{4}-\d{2}-\d{2})\*\*", line)
+        if not date_match or "<details>" not in line:
+            continue
+
+        date_str = date_match.group(1)
+
+        # Title: first bold text that isn't the date
+        title = ""
+        for item in re.findall(r"\*\*([^*]+)\*\*", line):
+            if not re.match(r"\d{4}-\d{2}-\d{2}", item):
+                title = item.strip()
+                break
+
+        # Inline tags (backtick-wrapped)
+        tags = re.findall(r"`(\w+)`", line)
+
+        # Abstract
+        abstract = ""
+        det_match = re.search(
+            r"<details><summary>Abstract</summary>(.*?)</details>", line, re.DOTALL
+        )
+        if det_match:
+            abstract = det_match.group(1).strip()
+            abstract = re.sub(r"<[^>]+>", "", abstract)
+            abstract = re.sub(r"\s+", " ", abstract).strip()
+
+        # Authors & links: fields after </details>
+        after_details = line.split("</details>")[-1] if "</details>" in line else ""
+        after_parts = [p.strip() for p in after_details.split("|") if p.strip()]
+        authors = after_parts[0] if len(after_parts) > 0 else ""
+        links_raw = after_parts[1] if len(after_parts) > 1 else ""
+
+        arxiv_match = re.search(r"\[ArXiv\]\((http[^)]+)\)", links_raw)
+        web_match = re.search(r"\[Web\]\((http[^)]+)\)", links_raw)
+
+        papers.append({
+            "date": date_str,
+            "title": title,
+            "tags": tags,
+            "abstract": abstract,
+            "authors": authors,
+            "url": arxiv_match.group(1) if arxiv_match else "",
+            "web": web_match.group(1) if web_match else "",
+            "section": current_section,
+        })
+
+    return papers
+
+
+def fetch_latest_papers(
+    target_date: Optional[str] = None,
+    sections: Optional[list[str]] = None,
+) -> list[dict]:
+    """
+    Return papers from specified sections for a given date (or most recent).
+
+    Unlike fetch_latest_dexterous_papers(), this supports multiple sections
+    and deduplicates papers that appear in more than one section.
+
+    Args:
+        target_date: "YYYY-MM-DD" format. None → auto-detect most recent date.
+        sections: List of section names to include (default: ROBOTICS_SECTIONS).
+
+    Returns:
+        list of paper dicts (deduplicated by arXiv URL)
+    """
+    if sections is None:
+        sections = ROBOTICS_SECTIONS
+
+    readme = fetch_readme()
+    all_papers = parse_all_sections(readme)
+
+    if not all_papers:
+        return []
+
+    # Section filter
+    allowed = {s.lower() for s in sections}
+    filtered = [
+        p for p in all_papers
+        if any(a in p["section"].lower() for a in allowed)
+    ]
+
+    if not filtered:
+        return []
+
+    # Date filter
+    if target_date:
+        dated = [p for p in filtered if p["date"] == target_date]
+        if not dated:
+            # Fall back to most recent date ≤ target_date
+            earlier = [p for p in filtered if p["date"] <= target_date]
+            if earlier:
+                latest_date = max(p["date"] for p in earlier)
+                dated = [p for p in earlier if p["date"] == latest_date]
+            else:
+                return []
+    else:
+        latest_date = max(p["date"] for p in filtered)
+        dated = [p for p in filtered if p["date"] == latest_date]
+
+    # Deduplicate by arXiv URL (same paper can appear in multiple sections)
+    seen = set()
+    unique = []
+    for p in dated:
+        key = p["url"] or p["title"]
+        if key not in seen:
+            seen.add(key)
+            unique.append(p)
+
+    return unique
+
+
 # ── CLI test ──
 if __name__ == "__main__":
-    papers = fetch_latest_dexterous_papers()
-    print(f"Found {len(papers)} papers (date: {papers[0]['date'] if papers else 'N/A'})\n")
+    import sys
+
+    if "--all" in sys.argv:
+        papers = fetch_latest_papers()
+        label = "All sections"
+    else:
+        papers = fetch_latest_dexterous_papers()
+        label = "Dexterous only"
+
+    print(f"[{label}] Found {len(papers)} papers "
+          f"(date: {papers[0]['date'] if papers else 'N/A'})\n")
     for i, p in enumerate(papers, 1):
         print(f"{i}. [{p['date']}] {p['title']}")
-        print(f"   Tags: {p.get('tags', [])}")
+        print(f"   Tags: {p.get('tags', [])}  Section: {p.get('section', '')}")
         print(f"   Authors: {p['authors']}")
         print(f"   URL: {p['url']}")
         print(f"   Abstract: {p['abstract'][:150]}...\n")

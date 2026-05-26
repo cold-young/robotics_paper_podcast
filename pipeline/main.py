@@ -15,10 +15,11 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from pipeline.fetch_papers import fetch_latest_dexterous_papers
+from pipeline.fetch_papers import fetch_latest_dexterous_papers, fetch_latest_papers
 from pipeline.generate_script import generate_podcast_script
 from pipeline.synthesize_audio import synthesize_podcast
 from pipeline.build_site import build_site
+from pipeline.send_telegram import send_paper_updates
 
 
 def main():
@@ -28,6 +29,7 @@ def main():
     parser.add_argument("--output-dir", type=str, default="output", help="Output directory")
     parser.add_argument("--site-dir", type=str, default="site", help="GitHub Pages site directory")
     parser.add_argument("--max-papers", type=int, default=5, help="Max papers per episode")
+    parser.add_argument("--no-telegram", action="store_true", help="Skip Telegram notification")
     args = parser.parse_args()
 
     target_date = args.date or datetime.now().strftime("%Y-%m-%d")
@@ -91,6 +93,15 @@ def main():
     print(f"  Audio: {audio_path}")
     print(f"  Site:  {args.site_dir}/index.html")
     print(f"{'='*60}")
+
+    # ── Step 5: Telegram notification ──
+    if not args.no_telegram:
+        print(f"\n[5/5] Sending Telegram notifications...")
+        tg_papers = fetch_latest_papers(target_date=target_date)
+        actual_date = tg_papers[0]["date"] if tg_papers else target_date
+        send_paper_updates(tg_papers, actual_date)
+    else:
+        print("\n[5/5] Telegram notification skipped (--no-telegram)")
 
 
 if __name__ == "__main__":
