@@ -1,16 +1,16 @@
 [
   {
-    "date": "2026-05-29",
-    "title": "로보틱스 논문 탐험대: Hand-in-the-Loop, 로봇 손의 섬세한 터치!",
-    "description": "오늘은 고자유도 로봇 손의 섬세한 조작을 위한 'Hand-in-the-Loop' 시스템 논문을 파헤쳐 봅니다! 망망이와 뭉이와 함께 로봇 손재주 조작의 새로운 가능성을 탐험해 보세요.",
+    "date": "2026-05-30",
+    "title": "로보틱스 연구실 옆자리: 덱스터러스 조작의 숨은 고수, Hand-in-the-Loop!",
+    "description": "오늘은 로봇이 섬세한 손재주를 배우는 길을 열어줄 최신 논문, 'Hand-in-the-Loop'를 망망이와 뭉이가 파헤쳐봅니다! 사람의 개입으로 로봇의 미세한 움직임을 완벽하게 만드는 비법은 무엇일까요?",
     "papers": [
       {
         "title": "Hand-in-the-Loop: Improving Dexterous VLA via Seamless Interventional Correction",
         "url": "http://arxiv.org/abs/2605.15157"
       }
     ],
-    "audio_file": "episodes/episode_2026-05-29.mp3",
-    "duration": "5분"
+    "audio_file": "episodes/episode_2026-05-30.mp3",
+    "duration": "약 4분"
   },
   {
     "date": "2026-04-10",
