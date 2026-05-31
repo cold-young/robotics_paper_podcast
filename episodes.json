@@ -1,8 +1,8 @@
 [
   {
     "date": "2026-05-31",
-    "title": "로봇의 정밀한 손끝 감각을 깨우다: BORA 프레임워크",
-    "description": "오프라인 강화학습과 온라인 잔차 적응을 결합하여 실제 세계에서 VLA 모델의 손재주 조작 성능을 극대화한 BORA 논문을 소개합니다.",
+    "title": "로봇 연구실 옆 햄스터와 강아지 - 덱스터러스 조작의 새로운 지평, BORA!",
+    "description": "오늘 에피소드에서는 VLA 모델의 손재주 조작 능력을 한 단계 끌어올린 'BORA' 논문을 파헤쳐 봅니다! 오프라인 학습과 온라인 적응의 환상적인 조합을 만나보세요.",
     "papers": [
       {
         "title": "BORA: Bridging Offline Reinforcement Learning and Online Residual Adaptation for Real-World Dexterous VLA Models",
@@ -10,7 +10,7 @@
       }
     ],
     "audio_file": "episodes/episode_2026-05-31.mp3",
-    "duration": "2분"
+    "duration": "5분"
   },
   {
     "date": "2026-04-10",
