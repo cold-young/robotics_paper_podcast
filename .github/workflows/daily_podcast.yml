@@ -36,6 +36,16 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python -m pipeline.main
 
+      - name: Persist Telegram sent-state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f output/sent_papers.json ]; then
+            git add -f output/sent_papers.json
+            git commit -m "chore: update telegram sent-state [skip ci]" || echo "No changes to commit"
+            git push || echo "Nothing to push"
+          fi
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
