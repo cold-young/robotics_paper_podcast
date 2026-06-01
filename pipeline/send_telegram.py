@@ -26,8 +26,8 @@ import json
 import os
 import time
 import urllib.request
-import urllib.error
-from typing import Optional
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from pipeline.generate_script import _call_llm
 
@@ -177,6 +177,7 @@ def send_paper_updates(
     papers: list[dict],
     target_date: str,
     dry_run: bool = False,
+    max_papers: int = 10,
 ) -> bool:
     """
     Send paper TL;DR summaries to Telegram.
@@ -185,6 +186,7 @@ def send_paper_updates(
         papers: list of paper dicts (from fetch_papers)
         target_date: date string for the header
         dry_run: if True, print to console instead of sending
+        max_papers: maximum number of new papers to send
 
     Returns:
         True if successful (or dry_run)
@@ -205,7 +207,7 @@ def send_paper_updates(
     if len(new_papers) < len(papers):
         print(f"  {len(papers) - len(new_papers)}편은 이미 전송됨 → 신규 {len(new_papers)}편만 전송")
 
-    papers = new_papers
+    papers = new_papers[:max_papers]
 
     # Generate TL;DR for each paper
     print("  Generating TL;DR summaries...")
@@ -249,21 +251,27 @@ def send_paper_updates(
 
 if __name__ == "__main__":
     import argparse
-    from pipeline.fetch_papers import fetch_latest_papers
+    from pipeline.fetch_papers import fetch_papers_updated_on
 
     parser = argparse.ArgumentParser(description="Send paper updates to Telegram")
     parser.add_argument("--date", type=str, default=None, help="Target date (YYYY-MM-DD)")
     parser.add_argument("--dry-run", action="store_true", help="Print to console only")
+    parser.add_argument("--max-papers", type=int, default=10, help="Max papers to send")
     parser.add_argument(
         "--sections", type=str, nargs="*", default=None,
         help="Sections to include (default: all robotics sections)",
     )
     args = parser.parse_args()
 
+    target_date = args.date or datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d")
+
     print("Fetching papers...")
-    papers = fetch_latest_papers(target_date=args.date, sections=args.sections)
+    papers = fetch_papers_updated_on(
+        updated_date=target_date,
+        sections=args.sections,
+        max_papers=args.max_papers,
+    )
 
-    actual_date = papers[0]["date"] if papers else (args.date or "N/A")
-    print(f"Found {len(papers)} papers for {actual_date}")
+    print(f"Found {len(papers)} papers updated on {target_date}")
 
-    send_paper_updates(papers, actual_date, dry_run=args.dry_run)
+    send_paper_updates(papers, target_date, dry_run=args.dry_run, max_papers=args.max_papers)

@@ -11,11 +11,11 @@ Usage:
 
 import argparse
 import json
-import os
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
-from pipeline.fetch_papers import fetch_latest_dexterous_papers, fetch_latest_papers
+from pipeline.fetch_papers import fetch_latest_dexterous_papers, fetch_papers_updated_on
 from pipeline.generate_script import generate_podcast_script
 from pipeline.synthesize_audio import synthesize_podcast
 from pipeline.build_site import build_site
@@ -29,10 +29,11 @@ def main():
     parser.add_argument("--output-dir", type=str, default="output", help="Output directory")
     parser.add_argument("--site-dir", type=str, default="site", help="GitHub Pages site directory")
     parser.add_argument("--max-papers", type=int, default=5, help="Max papers per episode")
+    parser.add_argument("--telegram-max-papers", type=int, default=10, help="Max papers per Telegram update")
     parser.add_argument("--no-telegram", action="store_true", help="Skip Telegram notification")
     args = parser.parse_args()
 
-    target_date = args.date or datetime.now().strftime("%Y-%m-%d")
+    target_date = args.date or datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d")
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -43,10 +44,15 @@ def main():
 
     # ── Step 1: Fetch papers ──
     print("[1/5] Fetching latest Dexterous papers...")
-    papers = fetch_latest_dexterous_papers(target_date=target_date, max_papers=args.max_papers)
+    papers = fetch_latest_dexterous_papers(
+        target_date=target_date,
+        max_papers=args.max_papers,
+        allow_fallback=False,
+    )
 
     if not papers:
-        print("  ! No papers found for this date. Exiting.")
+        print("  ! No Dexterous papers found for this date. Skipping podcast.")
+        _run_telegram(args, target_date)
         return
 
     print(f"  + Found {len(papers)} papers\n")
@@ -118,9 +124,11 @@ def _run_telegram(args, target_date: str):
 
     print(f"\n[5/5] Sending Telegram notifications...")
     try:
-        tg_papers = fetch_latest_papers(target_date=target_date)
-        actual_date = tg_papers[0]["date"] if tg_papers else target_date
-        send_paper_updates(tg_papers, actual_date)
+        tg_papers = fetch_papers_updated_on(
+            updated_date=target_date,
+            max_papers=args.telegram_max_papers,
+        )
+        send_paper_updates(tg_papers, target_date, max_papers=args.telegram_max_papers)
     except Exception as e:
         print(f"  ⚠ Telegram notification failed: {e}")
 

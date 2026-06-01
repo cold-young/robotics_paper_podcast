@@ -6,20 +6,44 @@ and extracts the latest papers from the Dexterous section.
 """
 
 import re
+import json
+import os
 import urllib.request
+from datetime import datetime, timedelta, timezone
 from typing import Optional
+from urllib.parse import urlencode
+from zoneinfo import ZoneInfo
 
 
-REPO_RAW_URL = (
-    "https://raw.githubusercontent.com/cold-young/robotics_paper_daily/main/README.md"
-)
+REPO_OWNER = "cold-young"
+REPO_NAME = "robotics_paper_daily"
+REPO_BRANCH = "main"
+README_PATH = "README.md"
+REPO_RAW_URL = f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/{REPO_BRANCH}/{README_PATH}"
+GITHUB_API_URL = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}"
 
 
-def fetch_readme() -> str:
+def fetch_readme(ref: str = REPO_BRANCH) -> str:
     """Fetch README.md from GitHub raw URL."""
-    req = urllib.request.Request(REPO_RAW_URL, headers={"User-Agent": "Mozilla/5.0"})
+    url = f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/{ref}/{README_PATH}"
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=30) as resp:
         return resp.read().decode("utf-8")
+
+
+def _fetch_json(url: str) -> object:
+    """Fetch JSON from the GitHub API."""
+    headers = {
+        "User-Agent": "robotics-paper-podcast",
+        "Accept": "application/vnd.github+json",
+    }
+    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read().decode("utf-8"))
 
 
 def parse_dexterous_section(readme: str) -> list[dict]:
@@ -120,6 +144,7 @@ def parse_dexterous_section(readme: str) -> list[dict]:
 def fetch_latest_dexterous_papers(
     target_date: Optional[str] = None,
     max_papers: int = 5,
+    allow_fallback: bool = True,
 ) -> list[dict]:
     """
     Return papers from the Dexterous section for a specific date (or most recent).
@@ -127,6 +152,8 @@ def fetch_latest_dexterous_papers(
     Args:
         target_date: "YYYY-MM-DD" format. None uses the most recent date.
         max_papers: Maximum number of papers to return.
+        allow_fallback: If True, use the most recent earlier date when the
+            target date has no papers.
 
     Returns:
         list of paper dicts
@@ -143,11 +170,13 @@ def fetch_latest_dexterous_papers(
         if filtered:
             return filtered[:max_papers]
 
-        # If no papers on target date, use most recent before it
-        earlier = [p for p in all_papers if p["date"] <= target_date]
-        if earlier:
-            latest_date = max(p["date"] for p in earlier)
-            return [p for p in earlier if p["date"] == latest_date][:max_papers]
+        if allow_fallback:
+            # If no papers on target date, use most recent before it
+            earlier = [p for p in all_papers if p["date"] <= target_date]
+            if earlier:
+                latest_date = max(p["date"] for p in earlier)
+                return [p for p in earlier if p["date"] == latest_date][:max_papers]
+        return []
 
     # If target_date is None, use most recent date
     latest_date = max(p["date"] for p in all_papers)
@@ -158,6 +187,51 @@ def fetch_latest_dexterous_papers(
 
 # Robotics-relevant sections (excludes HuggingFace Hot Papers)
 ROBOTICS_SECTIONS = ["Dexterous", "Manipulation", "VLA", "Tactile", "Sim2Real", "LearnedControl"]
+
+
+def _parse_paper_row(line: str, section: str = "") -> Optional[dict]:
+    """Parse one README table row into a paper dict."""
+    date_match = re.search(r"\*\*(\d{4}-\d{2}-\d{2})\*\*", line)
+    if not date_match or "<details>" not in line:
+        return None
+
+    date_str = date_match.group(1)
+
+    title = ""
+    for item in re.findall(r"\*\*([^*]+)\*\*", line):
+        if not re.match(r"\d{4}-\d{2}-\d{2}", item):
+            title = item.strip()
+            break
+
+    tags = re.findall(r"`(\w+)`", line)
+
+    abstract = ""
+    det_match = re.search(
+        r"<details><summary>Abstract</summary>(.*?)</details>", line, re.DOTALL
+    )
+    if det_match:
+        abstract = det_match.group(1).strip()
+        abstract = re.sub(r"<[^>]+>", "", abstract)
+        abstract = re.sub(r"\s+", " ", abstract).strip()
+
+    after_details = line.split("</details>")[-1] if "</details>" in line else ""
+    after_parts = [p.strip() for p in after_details.split("|") if p.strip()]
+    authors = after_parts[0] if len(after_parts) > 0 else ""
+    links_raw = after_parts[1] if len(after_parts) > 1 else ""
+
+    arxiv_match = re.search(r"\[ArXiv\]\((http[^)]+)\)", links_raw)
+    web_match = re.search(r"\[Web\]\((http[^)]+)\)", links_raw)
+
+    return {
+        "date": date_str,
+        "title": title,
+        "tags": tags,
+        "abstract": abstract,
+        "authors": authors,
+        "url": arxiv_match.group(1) if arxiv_match else "",
+        "web": web_match.group(1) if web_match else "",
+        "section": section,
+    }
 
 
 def parse_all_sections(readme: str) -> list[dict]:
@@ -180,52 +254,9 @@ def parse_all_sections(readme: str) -> list[dict]:
             current_section = sec_match.group(1).strip()
             continue
 
-        # Paper row: must have a date and <details> tag
-        date_match = re.search(r"\*\*(\d{4}-\d{2}-\d{2})\*\*", line)
-        if not date_match or "<details>" not in line:
-            continue
-
-        date_str = date_match.group(1)
-
-        # Title: first bold text that isn't the date
-        title = ""
-        for item in re.findall(r"\*\*([^*]+)\*\*", line):
-            if not re.match(r"\d{4}-\d{2}-\d{2}", item):
-                title = item.strip()
-                break
-
-        # Inline tags (backtick-wrapped)
-        tags = re.findall(r"`(\w+)`", line)
-
-        # Abstract
-        abstract = ""
-        det_match = re.search(
-            r"<details><summary>Abstract</summary>(.*?)</details>", line, re.DOTALL
-        )
-        if det_match:
-            abstract = det_match.group(1).strip()
-            abstract = re.sub(r"<[^>]+>", "", abstract)
-            abstract = re.sub(r"\s+", " ", abstract).strip()
-
-        # Authors & links: fields after </details>
-        after_details = line.split("</details>")[-1] if "</details>" in line else ""
-        after_parts = [p.strip() for p in after_details.split("|") if p.strip()]
-        authors = after_parts[0] if len(after_parts) > 0 else ""
-        links_raw = after_parts[1] if len(after_parts) > 1 else ""
-
-        arxiv_match = re.search(r"\[ArXiv\]\((http[^)]+)\)", links_raw)
-        web_match = re.search(r"\[Web\]\((http[^)]+)\)", links_raw)
-
-        papers.append({
-            "date": date_str,
-            "title": title,
-            "tags": tags,
-            "abstract": abstract,
-            "authors": authors,
-            "url": arxiv_match.group(1) if arxiv_match else "",
-            "web": web_match.group(1) if web_match else "",
-            "section": current_section,
-        })
+        paper = _parse_paper_row(line, current_section)
+        if paper:
+            papers.append(paper)
 
     return papers
 
@@ -233,6 +264,8 @@ def parse_all_sections(readme: str) -> list[dict]:
 def fetch_latest_papers(
     target_date: Optional[str] = None,
     sections: Optional[list[str]] = None,
+    max_papers: int = 10,
+    allow_fallback: bool = True,
 ) -> list[dict]:
     """
     Return papers from specified sections for a given date (or most recent).
@@ -243,6 +276,9 @@ def fetch_latest_papers(
     Args:
         target_date: "YYYY-MM-DD" format. None → auto-detect most recent date.
         sections: List of section names to include (default: ROBOTICS_SECTIONS).
+        max_papers: Maximum number of papers to return.
+        allow_fallback: If True, use the most recent earlier date when the
+            target date has no papers.
 
     Returns:
         list of paper dicts (deduplicated by arXiv URL)
@@ -270,11 +306,14 @@ def fetch_latest_papers(
     if target_date:
         dated = [p for p in filtered if p["date"] == target_date]
         if not dated:
-            # Fall back to most recent date ≤ target_date
-            earlier = [p for p in filtered if p["date"] <= target_date]
-            if earlier:
-                latest_date = max(p["date"] for p in earlier)
-                dated = [p for p in earlier if p["date"] == latest_date]
+            if allow_fallback:
+                # Fall back to most recent date ≤ target_date
+                earlier = [p for p in filtered if p["date"] <= target_date]
+                if earlier:
+                    latest_date = max(p["date"] for p in earlier)
+                    dated = [p for p in earlier if p["date"] == latest_date]
+                else:
+                    return []
             else:
                 return []
     else:
@@ -290,7 +329,97 @@ def fetch_latest_papers(
             seen.add(key)
             unique.append(p)
 
+    return unique[:max_papers]
+
+
+def _paper_key(paper: dict) -> str:
+    """Stable key for matching papers across README revisions."""
+    return paper.get("url") or paper.get("title", "")
+
+
+def _filter_sections(papers: list[dict], sections: Optional[list[str]]) -> list[dict]:
+    """Filter papers to the requested README sections."""
+    if sections is None:
+        sections = ROBOTICS_SECTIONS
+
+    allowed = {s.lower() for s in sections}
+    return [
+        p for p in papers
+        if any(a in p.get("section", "").lower() for a in allowed)
+    ]
+
+
+def _dedupe_papers(papers: list[dict]) -> list[dict]:
+    """Deduplicate papers while preserving order."""
+    seen = set()
+    unique = []
+    for paper in papers:
+        key = _paper_key(paper)
+        if key and key not in seen:
+            seen.add(key)
+            unique.append(paper)
     return unique
+
+
+def _day_bounds_utc(date_str: str, timezone_name: str) -> tuple[str, str]:
+    """Return ISO UTC start/end timestamps for a local date."""
+    tz = ZoneInfo(timezone_name)
+    start_local = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=tz)
+    end_local = start_local + timedelta(days=1)
+    start_utc = start_local.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+    end_utc = end_local.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+    return start_utc, end_utc
+
+
+def _fetch_readme_commits(since: Optional[str] = None, until: Optional[str] = None, per_page: int = 100) -> list[dict]:
+    """Fetch commits that touched README.md."""
+    params = {"path": README_PATH, "per_page": str(per_page)}
+    if since:
+        params["since"] = since
+    if until:
+        params["until"] = until
+
+    url = f"{GITHUB_API_URL}/commits?{urlencode(params)}"
+    data = _fetch_json(url)
+    if isinstance(data, list):
+        return data
+    return []
+
+
+def fetch_papers_updated_on(
+    updated_date: str,
+    sections: Optional[list[str]] = None,
+    max_papers: int = 10,
+    timezone_name: str = "Asia/Seoul",
+) -> list[dict]:
+    """
+    Return papers added to robotics_paper_daily README during a local calendar day.
+
+    This uses GitHub commit timestamps for README.md, then compares the current
+    README against the last README revision before the day started. Paper dates
+    may be older than updated_date; updated_date describes when the upstream repo
+    added them.
+    """
+    start_utc, end_utc = _day_bounds_utc(updated_date, timezone_name)
+    todays_commits = _fetch_readme_commits(since=start_utc, until=end_utc)
+    if not todays_commits:
+        return []
+
+    current_papers = _filter_sections(parse_all_sections(fetch_readme()), sections)
+    current_papers = _dedupe_papers(current_papers)
+    if not current_papers:
+        return []
+
+    baseline_commits = _fetch_readme_commits(until=start_utc, per_page=1)
+    if baseline_commits:
+        baseline_sha = baseline_commits[0]["sha"]
+        baseline_papers = _filter_sections(parse_all_sections(fetch_readme(ref=baseline_sha)), sections)
+        baseline_keys = {_paper_key(p) for p in baseline_papers}
+    else:
+        baseline_keys = set()
+
+    added = [p for p in current_papers if _paper_key(p) not in baseline_keys]
+    return added[:max_papers]
 
 
 # ── CLI test ──

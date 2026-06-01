@@ -27,6 +27,16 @@ jobs:
           pip install pydub
           sudo apt-get update && sudo apt-get install -y ffmpeg
 
+      - name: Restore published site state
+        run: |
+          rm -rf site
+          mkdir -p site
+          if git fetch origin gh-pages:refs/remotes/origin/gh-pages --depth=1; then
+            git archive origin/gh-pages | tar -x -C site
+          else
+            echo "No gh-pages branch found yet; starting with a fresh site directory."
+          fi
+
       - name: Run pipeline
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
@@ -34,6 +44,7 @@ jobs:
           LLM_MODEL: ${{ secrets.LLM_MODEL || 'gemini-2.5-flash' }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: python -m pipeline.main
 
       - name: Persist Telegram sent-state

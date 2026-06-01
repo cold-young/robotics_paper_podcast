@@ -7,10 +7,10 @@ Generates/updates GitHub Pages HTML based on episode metadata.
 import json
 import shutil
 from pathlib import Path
-from datetime import datetime
 
 
 EPISODES_JSON = "episodes.json"
+MAX_EPISODES = 5
 
 
 def _load_episodes(site_dir: str) -> list[dict]:
@@ -27,6 +27,28 @@ def _save_episodes(episodes: list[dict], site_dir: str):
     path = Path(site_dir) / EPISODES_JSON
     with open(path, "w", encoding="utf-8") as f:
         json.dump(episodes, f, ensure_ascii=False, indent=2)
+
+
+def _episode_sort_key(episode: dict) -> str:
+    """Sort episodes by date string, newest first."""
+    return episode.get("date", "")
+
+
+def _prune_audio_files(site_path: Path, kept_episodes: list[dict]) -> None:
+    """Delete MP3 files that are no longer referenced by the kept episodes."""
+    episodes_dir = site_path / "episodes"
+    if not episodes_dir.exists():
+        return
+
+    kept_audio = {
+        (site_path / ep["audio_file"]).resolve()
+        for ep in kept_episodes
+        if ep.get("audio_file")
+    }
+
+    for mp3_path in episodes_dir.glob("*.mp3"):
+        if mp3_path.resolve() not in kept_audio:
+            mp3_path.unlink()
 
 
 def build_site(episode_meta: dict, site_dir: str, audio_src_path: str):
@@ -48,11 +70,13 @@ def build_site(episode_meta: dict, site_dir: str, audio_src_path: str):
     shutil.copy2(audio_src_path, audio_dest)
     episode_meta["audio_file"] = f"episodes/{audio_filename}"
 
-    # Update episode list (prevent duplicates)
+    # Update episode list (prevent duplicates), then keep the latest 5 days.
     episodes = _load_episodes(site_dir)
     episodes = [ep for ep in episodes if ep["date"] != episode_meta["date"]]
-    episodes.insert(0, episode_meta)  # Latest episode first
+    episodes.insert(0, episode_meta)
+    episodes = sorted(episodes, key=_episode_sort_key, reverse=True)[:MAX_EPISODES]
     _save_episodes(episodes, site_dir)
+    _prune_audio_files(site_path, episodes)
 
     # Generate index.html
     _generate_index_html(site_path, episodes)
