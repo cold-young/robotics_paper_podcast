@@ -46,6 +46,26 @@ def _fetch_json(url: str) -> object:
         return json.loads(resp.read().decode("utf-8"))
 
 
+def _extract_links(links_raw: str) -> tuple[str, str, list[dict]]:
+    """Extract Markdown links while preserving labels such as ArXiv/OpenReview."""
+    links = [
+        {"label": label.strip(), "url": url.strip()}
+        for label, url in re.findall(r"\[([^\]]+)\]\((http[^)]+)\)", links_raw)
+    ]
+
+    arxiv_url = ""
+    web_url = ""
+    for link in links:
+        label = link["label"].lower()
+        if not arxiv_url and "arxiv" in label:
+            arxiv_url = link["url"]
+        elif not web_url and any(word in label for word in ("web", "project", "github", "code", "openreview")):
+            web_url = link["url"]
+
+    primary_url = arxiv_url or (links[0]["url"] if links else "")
+    return primary_url, web_url, links
+
+
 def parse_dexterous_section(readme: str) -> list[dict]:
     """
     Parse the paper table from the Dexterous section.
@@ -100,8 +120,7 @@ def parse_dexterous_section(readme: str) -> list[dict]:
         abstract = re.sub(r"<[^>]+>", "", abstract)
         abstract = re.sub(r"\s+", " ", abstract).strip()
 
-        arxiv_match = re.search(r"\[ArXiv\]\((http[^)]+)\)", links_raw)
-        web_match = re.search(r"\[Web\]\((http[^)]+)\)", links_raw)
+        primary_url, web_url, links = _extract_links(links_raw)
 
         papers.append({
             "date": date_str,
@@ -109,8 +128,9 @@ def parse_dexterous_section(readme: str) -> list[dict]:
             "tags": tags,
             "abstract": abstract,
             "authors": authors,
-            "url": arxiv_match.group(1) if arxiv_match else "",
-            "web": web_match.group(1) if web_match else "",
+            "url": primary_url,
+            "web": web_url,
+            "links": links,
         })
 
     # Fall back to format B if no results
@@ -125,8 +145,7 @@ def parse_dexterous_section(readme: str) -> list[dict]:
             abstract = re.sub(r"<[^>]+>", "", abstract)
             abstract = re.sub(r"\s+", " ", abstract).strip()
 
-            arxiv_match = re.search(r"\[ArXiv\]\((http[^)]+)\)", links_raw)
-            web_match = re.search(r"\[Web\]\((http[^)]+)\)", links_raw)
+            primary_url, web_url, links = _extract_links(links_raw)
 
             papers.append({
                 "date": date_str,
@@ -134,8 +153,9 @@ def parse_dexterous_section(readme: str) -> list[dict]:
                 "tags": [],
                 "abstract": abstract,
                 "authors": authors,
-                "url": arxiv_match.group(1) if arxiv_match else "",
-                "web": web_match.group(1) if web_match else "",
+                "url": primary_url,
+                "web": web_url,
+                "links": links,
             })
 
     return papers
@@ -219,8 +239,7 @@ def _parse_paper_row(line: str, section: str = "") -> Optional[dict]:
     authors = after_parts[0] if len(after_parts) > 0 else ""
     links_raw = after_parts[1] if len(after_parts) > 1 else ""
 
-    arxiv_match = re.search(r"\[ArXiv\]\((http[^)]+)\)", links_raw)
-    web_match = re.search(r"\[Web\]\((http[^)]+)\)", links_raw)
+    primary_url, web_url, links = _extract_links(links_raw)
 
     return {
         "date": date_str,
@@ -228,8 +247,9 @@ def _parse_paper_row(line: str, section: str = "") -> Optional[dict]:
         "tags": tags,
         "abstract": abstract,
         "authors": authors,
-        "url": arxiv_match.group(1) if arxiv_match else "",
-        "web": web_match.group(1) if web_match else "",
+        "url": primary_url,
+        "web": web_url,
+        "links": links,
         "section": section,
     }
 

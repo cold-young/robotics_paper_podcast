@@ -90,6 +90,11 @@ def _escape_html(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def _escape_attr(text: str) -> str:
+    """Escape text for HTML attributes."""
+    return _escape_html(text).replace('"', "&quot;")
+
+
 def _send_message(text: str) -> bool:
     """Send a single message via Telegram Bot API."""
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -129,11 +134,17 @@ def _format_paper(paper: dict, idx: int, total: int) -> str:
 
     tag_str = " ".join(f"#{t}" for t in paper.get("tags", []))
 
-    links = ""
-    if paper.get("url"):
-        links = f'<a href="{paper["url"]}">📄 arXiv</a>'
-    if paper.get("web"):
-        links += f' | <a href="{paper["web"]}">🌐 Project</a>'
+    link_items = paper.get("links") or []
+    if not link_items and paper.get("url"):
+        link_items = [{"label": "arXiv", "url": paper["url"]}]
+    if paper.get("web") and paper["web"] not in {item.get("url") for item in link_items}:
+        link_items.append({"label": "Project", "url": paper["web"]})
+
+    links = " | ".join(
+        f'<a href="{_escape_attr(item["url"])}">🔗 {_escape_html(item.get("label", "Link"))}</a>'
+        for item in link_items
+        if item.get("url")
+    )
 
     msg = (
         f"[{idx}/{total}] <b>{title}</b>\n"
