@@ -38,6 +38,10 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
 LLM_API_KEY = os.environ.get("LLM_API_KEY", "").strip()
 
+# Tracks which papers have already been sent, to avoid duplicate notifications.
+# This file must be committed back to the repo by the workflow to persist across runs.
+SENT_STATE_PATH = os.environ.get("TELEGRAM_SENT_STATE", "output/sent_papers.json")
+
 TLDR_SYSTEM_PROMPT = """\
 당신은 로보틱스 분야 전문 연구원입니다.
 주어진 논문 제목과 초록을 읽고, 한국어로 2~3문장의 TL;DR 요약을 작성하세요.
@@ -141,6 +145,32 @@ def _format_paper(paper: dict, idx: int, total: int) -> str:
     return msg
 
 
+# ── Sent-state tracking (duplicate prevention) ───────────────────────────────
+
+def _paper_key(paper: dict) -> str:
+    """Stable unique key for a paper (arXiv URL, or title fallback)."""
+    return paper.get("url") or paper.get("title", "")
+
+
+def _load_sent_keys() -> set[str]:
+    """Load the set of already-sent paper keys from disk."""
+    try:
+        with open(SENT_STATE_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return set(data.get("sent_keys", []))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return set()
+
+
+def _save_sent_keys(keys: set[str]) -> None:
+    """Persist the set of sent paper keys to disk (keeps most recent 2000)."""
+    os.makedirs(os.path.dirname(SENT_STATE_PATH) or ".", exist_ok=True)
+    # Cap the list so the file doesn't grow forever
+    trimmed = list(keys)[-2000:]
+    with open(SENT_STATE_PATH, "w", encoding="utf-8") as f:
+        json.dump({"sent_keys": trimmed}, f, ensure_ascii=False, indent=2)
+
+
 # ── Public API ───────────────────────────────────────────────────────────────
 
 def send_paper_updates(
@@ -160,12 +190,22 @@ def send_paper_updates(
         True if successful (or dry_run)
     """
     if not papers:
-        msg = f"📅 {target_date}: 오늘 업데이트된 논문이 없습니다."
-        if dry_run:
-            print(msg)
-        else:
-            _send_message(msg)
+        # arxiv가 멈췄거나 새 논문이 없는 경우: 조용히 종료 (매일 "없음" 스팸 방지)
+        print(f"  No papers for {target_date}. Nothing to send.")
         return True
+
+    # ── 중복 방지: 이미 보낸 논문 제외 ──
+    sent_keys = _load_sent_keys()
+    new_papers = [p for p in papers if _paper_key(p) not in sent_keys]
+
+    if not new_papers:
+        print(f"  All {len(papers)} papers for {target_date} were already sent. Skipping.")
+        return True
+
+    if len(new_papers) < len(papers):
+        print(f"  {len(papers) - len(new_papers)}편은 이미 전송됨 → 신규 {len(new_papers)}편만 전송")
+
+    papers = new_papers
 
     # Generate TL;DR for each paper
     print("  Generating TL;DR summaries...")
@@ -196,6 +236,10 @@ def send_paper_updates(
             msg = msg[:3997] + "..."
         _send_message(msg)
         time.sleep(0.3)
+
+    # 전송 성공한 논문을 sent 상태에 기록
+    sent_keys.update(_paper_key(p) for p in papers)
+    _save_sent_keys(sent_keys)
 
     print(f"  + Telegram: {len(papers)}편 전송 완료")
     return True
