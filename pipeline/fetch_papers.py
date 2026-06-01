@@ -386,6 +386,14 @@ def _fetch_readme_commits(since: Optional[str] = None, until: Optional[str] = No
     return []
 
 
+def _fetch_commit(sha: str) -> dict:
+    """Fetch one commit object from the GitHub API."""
+    data = _fetch_json(f"{GITHUB_API_URL}/commits/{sha}")
+    if isinstance(data, dict):
+        return data
+    return {}
+
+
 def fetch_papers_updated_on(
     updated_date: str,
     sections: Optional[list[str]] = None,
@@ -395,31 +403,46 @@ def fetch_papers_updated_on(
     """
     Return papers added to robotics_paper_daily README during a local calendar day.
 
-    This uses GitHub commit timestamps for README.md, then compares the current
-    README against the last README revision before the day started. Paper dates
-    may be older than updated_date; updated_date describes when the upstream repo
-    added them.
+    This uses GitHub commit timestamps for README.md, then compares each README
+    revision against its parent commit. Paper dates may be older than updated_date;
+    updated_date describes when the upstream repo added them.
     """
     start_utc, end_utc = _day_bounds_utc(updated_date, timezone_name)
     todays_commits = _fetch_readme_commits(since=start_utc, until=end_utc)
     if not todays_commits:
         return []
 
-    current_papers = _filter_sections(parse_all_sections(fetch_readme()), sections)
-    current_papers = _dedupe_papers(current_papers)
-    if not current_papers:
-        return []
+    added_papers = []
+    seen_added = set()
 
-    baseline_commits = _fetch_readme_commits(until=start_utc, per_page=1)
-    if baseline_commits:
-        baseline_sha = baseline_commits[0]["sha"]
-        baseline_papers = _filter_sections(parse_all_sections(fetch_readme(ref=baseline_sha)), sections)
-        baseline_keys = {_paper_key(p) for p in baseline_papers}
-    else:
-        baseline_keys = set()
+    for commit in reversed(todays_commits):
+        commit_sha = commit["sha"]
+        commit_data = _fetch_commit(commit_sha)
+        parent_sha = ""
+        parents = commit_data.get("parents", [])
+        if parents:
+            parent_sha = parents[0].get("sha", "")
 
-    added = [p for p in current_papers if _paper_key(p) not in baseline_keys]
-    return added[:max_papers]
+        after_papers = _dedupe_papers(
+            _filter_sections(parse_all_sections(fetch_readme(ref=commit_sha)), sections)
+        )
+        if parent_sha:
+            before_papers = _dedupe_papers(
+                _filter_sections(parse_all_sections(fetch_readme(ref=parent_sha)), sections)
+            )
+            before_keys = {_paper_key(p) for p in before_papers}
+        else:
+            before_keys = set()
+
+        for paper in after_papers:
+            key = _paper_key(paper)
+            if key and key not in before_keys and key not in seen_added:
+                seen_added.add(key)
+                added_papers.append(paper)
+                if len(added_papers) >= max_papers:
+                    return added_papers
+
+    return added_papers
 
 
 # ── CLI test ──
