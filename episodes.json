@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-06-02",
+    "title": "로보틱스 연구실의 수다: 손재주 조작, 로봇의 섬세한 움직임을 위한 최신 연구 (2026-06-02)",
+    "description": "2026년 6월 2일, 로봇의 섬세한 움직임과 인지 능력을 향상시키는 손재주 조작(Dexterous Manipulation) 분야의 최신 논문 5편을 망망이와 뭉이가 소개합니다.",
+    "papers": [
+      {
+        "title": "Revisiting Embodied Chain-of-Thought for Generalizable Robot Manipulation",
+        "url": "http://arxiv.org/abs/2606.03784"
+      },
+      {
+        "title": "PHASER: Phase-Aware and Semantic Experience Replay for Vision-Language-Action Models",
+        "url": "http://arxiv.org/abs/2606.03598"
+      },
+      {
+        "title": "OpenEAI-Platform: An Open-source Embodied Artificial Intelligence Hardware-Software Unified Platform",
+        "url": "http://arxiv.org/abs/2606.03392"
+      },
+      {
+        "title": "Grasp-Then-Plan with Failure Attribution: A Closed Two-Stage Framework for Precise and Generalizable Robotic Manipulation",
+        "url": "http://arxiv.org/abs/2606.03385"
+      },
+      {
+        "title": "SimuScene: Simulation-Ready Compositional 3D Scene Reconstruction from a Single Image",
+        "url": "http://arxiv.org/abs/2606.03994"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-06-02.mp3",
+    "duration": "15분"
+  },
+  {
     "date": "2026-06-01",
     "title": "로보토크 #12: 굳어버린 VLA 모델에 날개를 달아줄 'BORA'!",
     "description": "실세계 손재주 조작(Dexterous Manipulation)을 위한 오프라인 강화학습과 온라인 잔차 적응(Online Residual Adaptation)의 결합, BORA 논문을 소개합니다.",
