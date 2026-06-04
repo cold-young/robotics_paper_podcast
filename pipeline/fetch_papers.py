@@ -414,34 +414,26 @@ def _fetch_commit(sha: str) -> dict:
     return {}
 
 
-def fetch_papers_updated_on(
-    updated_date: str,
-    sections: Optional[list[str]] = None,
-    max_papers: int = 10,
-    timezone_name: str = "Asia/Seoul",
+def _collect_added_papers(
+    commits: list[dict],
+    sections: Optional[list[str]],
+    max_papers: int,
 ) -> list[dict]:
     """
-    Return papers added to robotics_paper_daily README during a local calendar day.
+    Diff each commit against its first parent and collect newly-added papers.
 
-    This uses GitHub commit timestamps for README.md, then compares each README
-    revision against its parent commit. Paper dates may be older than updated_date;
-    updated_date describes when the upstream repo added them.
+    Commits are processed oldest-first so the returned list is in chronological
+    order of appearance. A paper counts as "added" when its key (arXiv URL or
+    title) is present in a commit's README but absent from its parent's README.
     """
-    start_utc, end_utc = _day_bounds_utc(updated_date, timezone_name)
-    todays_commits = _fetch_readme_commits(since=start_utc, until=end_utc)
-    if not todays_commits:
-        return []
+    added_papers: list[dict] = []
+    seen_added: set = set()
 
-    added_papers = []
-    seen_added = set()
-
-    for commit in reversed(todays_commits):
+    for commit in reversed(commits):
         commit_sha = commit["sha"]
         commit_data = _fetch_commit(commit_sha)
-        parent_sha = ""
         parents = commit_data.get("parents", [])
-        if parents:
-            parent_sha = parents[0].get("sha", "")
+        parent_sha = parents[0].get("sha", "") if parents else ""
 
         after_papers = _dedupe_papers(
             _filter_sections(parse_all_sections(fetch_readme(ref=commit_sha)), sections)
@@ -463,6 +455,54 @@ def fetch_papers_updated_on(
                     return added_papers
 
     return added_papers
+
+
+def fetch_papers_updated_on(
+    updated_date: str,
+    sections: Optional[list[str]] = None,
+    max_papers: int = 10,
+    timezone_name: str = "Asia/Seoul",
+) -> list[dict]:
+    """
+    Return papers added to robotics_paper_daily README during a local calendar day.
+
+    This uses GitHub commit timestamps for README.md, then compares each README
+    revision against its parent commit. Paper dates may be older than updated_date;
+    updated_date describes when the upstream repo added them.
+
+    NOTE: This is tightly coupled to a single calendar day. Because the GitHub
+    Action may run *before* the upstream repo commits that day's papers, prefer
+    fetch_recently_added_papers() for the scheduled pipeline.
+    """
+    start_utc, end_utc = _day_bounds_utc(updated_date, timezone_name)
+    commits = _fetch_readme_commits(since=start_utc, until=end_utc)
+    if not commits:
+        return []
+    return _collect_added_papers(commits, sections, max_papers)
+
+
+def fetch_recently_added_papers(
+    lookback_hours: int = 48,
+    sections: Optional[list[str]] = None,
+    max_papers: int = 10,
+) -> list[dict]:
+    """
+    Return papers added to robotics_paper_daily README within the last N hours.
+
+    Unlike fetch_papers_updated_on(), this is decoupled from the local calendar
+    day, so it tolerates the lag between the Action's run time and the upstream
+    repo's commit times (which typically land ~01:30 and ~13:22 UTC). Re-scanning
+    overlapping windows on consecutive runs is safe because send_telegram dedupes
+    already-sent papers via output/sent_papers.json.
+    """
+    until = datetime.now(timezone.utc)
+    since = until - timedelta(hours=lookback_hours)
+    to_iso = lambda d: d.isoformat().replace("+00:00", "Z")
+
+    commits = _fetch_readme_commits(since=to_iso(since), until=to_iso(until))
+    if not commits:
+        return []
+    return _collect_added_papers(commits, sections, max_papers)
 
 
 # ── CLI test ──
