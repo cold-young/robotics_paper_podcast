@@ -90,8 +90,13 @@ def _build_user_prompt(papers: list[dict], target_date: str) -> str:
 위 논문들을 기반으로 한국어 팟캐스트 대본을 JSON 형식으로 생성해주세요."""
 
 
-def _call_llm_once(system: str, user: str, model: str) -> str:
-    """Call an OpenAI-compatible API once."""
+def _call_llm_once(system: str, user: str, model: str, json_mode: bool = False) -> str:
+    """Call an OpenAI-compatible API once.
+
+    When json_mode is True, request a strict JSON object response. This is used
+    for the podcast-script call (which must be valid JSON) but NOT for the plain
+    text TL;DR call in send_telegram.
+    """
     url = f"{LLM_BASE_URL}/chat/completions"
     payload = {
         "model": model,
@@ -100,8 +105,11 @@ def _call_llm_once(system: str, user: str, model: str) -> str:
             {"role": "user", "content": user},
         ],
         "temperature": 0.7,
-        "max_tokens": 4096,
+        # 5-paper Korean dialogues can exceed 4096 output tokens and truncate.
+        "max_tokens": 8192,
     }
+    if json_mode:
+        payload["response_format"] = {"type": "json_object"}
 
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(
@@ -119,15 +127,25 @@ def _call_llm_once(system: str, user: str, model: str) -> str:
     return result["choices"][0]["message"]["content"]
 
 
-def _call_llm(system: str, user: str) -> str:
-    """Call LLM with retry and model fallback."""
+def _call_llm(system: str, user: str, json_mode: bool = False, validate=None) -> Any:
+    """Call LLM with retry and model fallback.
+
+    If `validate` is provided, it is applied to each successful response; raising
+    inside it (e.g. on malformed JSON) is treated as a retryable failure so a bad
+    response triggers another attempt / model fallback instead of crashing.
+    Returns the validator's return value when `validate` is set, else raw text.
+    """
     models_to_try = [LLM_MODEL] + [m for m in LLM_FALLBACK_MODELS if m != LLM_MODEL]
+    last_invalid = None
 
     for model in models_to_try:
         for attempt in range(1, MAX_RETRIES + 1):
             try:
                 print(f"    -> LLM call: model={model} (attempt {attempt}/{MAX_RETRIES})")
-                return _call_llm_once(system, user, model)
+                raw = _call_llm_once(system, user, model, json_mode=json_mode)
+                if validate is not None:
+                    return validate(raw)  # may raise -> retried below
+                return raw
             except urllib.error.HTTPError as e:
                 body = ""
                 try:
@@ -150,29 +168,51 @@ def _call_llm(system: str, user: str) -> str:
                 print(f"    ! Network error: {e.reason}. Retrying in {RETRY_DELAY}s...")
                 time.sleep(RETRY_DELAY)
                 continue
+            except (json.JSONDecodeError, AssertionError, ValueError, KeyError) as e:
+                # Malformed / incomplete response. Retry, then fall back to next model.
+                last_invalid = e
+                print(f"    ! Invalid response ({type(e).__name__}: {e}). Retrying...")
+                time.sleep(1)
+                continue
 
         print(f"    x Model {model} failed, trying next model...")
 
     raise RuntimeError(
         f"All LLM models failed. Tried: {models_to_try}\n"
-        "Possible causes:\n"
+        + (f"Last invalid-response error: {last_invalid}\n" if last_invalid else "")
+        + "Possible causes:\n"
         "  1. API key is invalid or expired\n"
         "  2. Free tier quota exceeded (check Google AI Studio)\n"
-        "  3. All models temporarily overloaded\n"
+        "  3. All models temporarily overloaded or returning malformed JSON\n"
         "Fix: Check LLM_API_KEY env var or retry later"
     )
 
 
 def _parse_llm_response(raw: str) -> dict:
-    """Extract JSON from LLM response."""
+    """Extract a JSON object from an LLM response, tolerating common defects."""
     raw = raw.strip()
+
+    # Strip ```json ... ``` (or ``` ... ```) code fences.
     if raw.startswith("```"):
         raw = raw.split("\n", 1)[1] if "\n" in raw else raw[3:]
     if raw.endswith("```"):
         raw = raw[:-3]
     raw = raw.strip()
 
-    return json.loads(raw)
+    # Drop any stray prose before/after the JSON object.
+    start, end = raw.find("{"), raw.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        raw = raw[start:end + 1]
+
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        # Most common defect: unescaped control characters (raw newlines/tabs)
+        # inside string values, which makes json see an "unterminated string".
+        # JSON ignores insignificant whitespace, so collapsing them to spaces is
+        # safe for our text-only payload.
+        repaired = raw.replace("\r", " ").replace("\n", " ").replace("\t", " ")
+        return json.loads(repaired)
 
 
 def generate_podcast_script(
@@ -190,14 +230,21 @@ def generate_podcast_script(
         return _fallback_script(papers, target_date)
 
     user_prompt = _build_user_prompt(papers, target_date)
-    raw_response = _call_llm(SYSTEM_PROMPT, user_prompt)
-    script = _parse_llm_response(raw_response)
 
-    # Validate structure
-    assert "dialogue" in script, "Missing 'dialogue' key in LLM response"
-    assert isinstance(script["dialogue"], list), "'dialogue' must be a list"
+    def _validate(raw: str) -> dict:
+        script = _parse_llm_response(raw)
+        assert "dialogue" in script, "Missing 'dialogue' key in LLM response"
+        assert isinstance(script["dialogue"], list), "'dialogue' must be a list"
+        assert script["dialogue"], "'dialogue' is empty"
+        return script
 
-    return script
+    try:
+        return _call_llm(SYSTEM_PROMPT, user_prompt, json_mode=True, validate=_validate)
+    except Exception as e:
+        # Never let script generation crash the whole pipeline (Telegram, etc.).
+        # Degrade to the deterministic template script instead.
+        print(f"  ! LLM script generation failed ({e}). Falling back to template script.")
+        return _fallback_script(papers, target_date)
 
 
 def _fallback_script(papers: list[dict], target_date: str) -> dict:
