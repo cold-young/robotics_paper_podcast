@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-06-26",
+    "title": "로보틱스 연구실: 손재주 로봇, 두 손으로 척척! 🐾🐹",
+    "description": "2026년 6월 26일, 오늘은 로봇의 섬세한 손재주 조작(Dexterous Manipulation) 능력에 대한 최신 연구들을 뭉이와 망망이가 함께 파헤쳐 봅니다!",
+    "papers": [
+      {
+        "title": "DexCompose: Reusing Dexterous Policies for Multi-Task Manipulation with a Single Hand",
+        "url": "http://arxiv.org/abs/2606.28323"
+      },
+      {
+        "title": "WARP-RM: A Warp-Augmented Relative Progress Reward Model for Data Curation",
+        "url": "http://arxiv.org/abs/2606.28320"
+      },
+      {
+        "title": "SimFoundry: Modular and Automated Scene Generation for Policy Learning and Evaluation** `Dexterous` 🔥 HF#18 <details><summary>Abstract</summary>Training and evaluating robot policies in the real world is costly and difficult to scale. We introduce SimFoundry, a modular and automated system for zero-shot real-to-sim scene construction from a video. SimFoundry generates sim-ready digital twins and supports object, scene, and task editing, enabling the automated generation of diverse digital cousins: affordance-preserving variations of...</details> | Yuke Zhu Team | [ArXiv](http://arxiv.org/abs/2606.28276) |\n| **2026-06-26** | **Agent-Native Immune System: Architecture, Taxonomy, and Engineering",
+        "url": "http://arxiv.org/abs/2606.28270"
+      },
+      {
+        "title": "Learning Stable In-Grasp Manipulation in a Non-Dropping Action Space",
+        "url": "http://arxiv.org/abs/2606.28196"
+      },
+      {
+        "title": "PA-BiCoop: A Primary-Auxiliary Cooperative Framework for General Bimanual Manipulation",
+        "url": "http://arxiv.org/abs/2606.28192"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-06-26.mp3",
+    "duration": "약 12분"
+  },
+  {
     "date": "2026-06-25",
     "title": "로보틱스 랩 스토리: 손재주 조작, 로봇의 섬세한 터치! (2026년 6월 25일)",
     "description": "2026년 6월 25일, 로봇의 손재주 조작(Dexterous Manipulation) 분야 최신 논문 5편을 망망이와 뭉이가 흥미진진하게 소개합니다. 로봇이 더욱 섬세하고 똑똑하게 물체를 다루는 미래를 함께 상상해 보세요!",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-06-18.mp3",
     "duration": "12분"
-  },
-  {
-    "date": "2026-06-17",
-    "title": "로보틱스 연구실: 손재주 조작(Dexterous Manipulation) 최신 트렌드 (2026.06.17)",
-    "description": "2026년 6월 17일, 로보틱스 분야의 핵심 주제인 손재주 조작(Dexterous Manipulation) 관련 최신 논문 5편을 망망이와 뭉이가 쉽고 재미있게 파헤쳐 봅니다!",
-    "papers": [
-      {
-        "title": "Zero-Shot Long-Horizon Dexterous Manipulation via Multi-View 3D-Grounded VLM Reasoning",
-        "url": "http://arxiv.org/abs/2606.19340"
-      },
-      {
-        "title": "Do as I Do: Dexterous Manipulation Data from Everyday Human Videos",
-        "url": "http://arxiv.org/abs/2606.19333"
-      },
-      {
-        "title": "Modeling Branches for Active Manipulation using Iterative Parameter Estimation",
-        "url": "http://arxiv.org/abs/2606.19314"
-      },
-      {
-        "title": "Mobile Pedipulation for Object Sliding via Hierarchical Control on a Wheeled Bipedal Robot",
-        "url": "http://arxiv.org/abs/2606.19233"
-      },
-      {
-        "title": "Invertible Neural Network Adapter for One-Step Flow Matching in Robot Manipulation",
-        "url": "http://arxiv.org/abs/2606.19194"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-06-17.mp3",
-    "duration": "15분"
   }
 ]
