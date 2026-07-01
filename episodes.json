@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-06-30",
+    "title": "로보틱스 랩실의 수다: 손재주 조작의 미래를 엿보다 (260630)",
+    "description": "2026년 6월 30일, 로보틱스 분야 최신 논문들을 망망이와 뭉이가 소개합니다. 오늘은 특히 로봇의 손재주 조작(Dexterous Manipulation)과 관련된 흥미로운 연구들을 파헤쳐봅니다!",
+    "papers": [
+      {
+        "title": "DVG-WM: Disentangled Video Generation Enables Efficient Embodied World Model for Robotic Manipulation",
+        "url": "http://arxiv.org/abs/2606.32028"
+      },
+      {
+        "title": "Freeform Preference Learning for Robotic Manipulation",
+        "url": "http://arxiv.org/abs/2606.32027"
+      },
+      {
+        "title": "Human-as-Humanoid: Enabling Zero-Shot Humanoid Learning from Ego-Exo Human Videos with Human-Aligned Embodiments",
+        "url": "http://arxiv.org/abs/2606.32009"
+      },
+      {
+        "title": "OopsieVerse: A Safety Benchmark with Damage-Aware Simulation for Robot Manipulation",
+        "url": "http://arxiv.org/abs/2606.31993"
+      },
+      {
+        "title": "Theory of Mind and Persuasion Beyond Conversation: Assessing the Capacity of LLMs to Induce Belief States via Planning and Action",
+        "url": "http://arxiv.org/abs/2606.31916"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-06-30.mp3",
+    "duration": "약 15분"
+  },
+  {
     "date": "2026-06-29",
     "title": "로보틱스 랩실 토크: 손재주 조작(Dexterous Manipulation)의 미래를 엿보다! (2026년 6월 29일)",
     "description": "오늘 에피소드에서는 휴머노이드 로봇의 전신 조작부터 뉴로심볼릭 플래닝, 그리고 대규모 데이터셋과 AI 보안, 사용자 인터페이스까지, 로보틱스 손재주 조작 분야의 최신 논문 5편을 망망이와 뭉이가 함께 살펴봅니다.",
@@ -113,35 +142,6 @@
       }
     ],
     "audio_file": "episodes/episode_2026-06-24.mp3",
-    "duration": "12분"
-  },
-  {
-    "date": "2026-06-22",
-    "title": "로보틱스 연구실 브리핑: 덱스터러스 매니퓰레이션 최신 동향 (2026년 6월 22일)",
-    "description": "2026년 6월 22일, 덱스터러스 매니퓰레이션(Dexterous Manipulation) 분야의 최신 논문 5편을 망망이와 뭉이가 쉽고 재미있게 풀어드립니다. 로봇의 안전, 인간 데이터 활용, 휴머노이드 조작, MLLM의 추론 능력까지, 흥미로운 연구들을 만나보세요!",
-    "papers": [
-      {
-        "title": "LIBERO-Safety: A Comprehensive Benchmark for Physical and Semantic Safety in Vision-Language-Action Models",
-        "url": "http://arxiv.org/abs/2606.23686"
-      },
-      {
-        "title": "LaST-HD: Learning Latent Physical Reasoning from Scalable Human Data for Robot Manipulation",
-        "url": "http://arxiv.org/abs/2606.23685"
-      },
-      {
-        "title": "CoorDex: Coordinating Body and Hand Priors for Continuous Dexterous Humanoid Loco-Manipulation",
-        "url": "http://arxiv.org/abs/2606.23680"
-      },
-      {
-        "title": "AIR: Adaptive Interleaved Reasoning with Code in MLLMs",
-        "url": "http://arxiv.org/abs/2606.23678"
-      },
-      {
-        "title": "Teaching LLMs String Matching, Backtracking, and Error Recovery to Deduce Bases and Truth Tables for the Combinatorially Exploding Bit Manipulation Puzzles",
-        "url": "http://arxiv.org/abs/2606.23672"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-06-22.mp3",
     "duration": "12분"
   }
 ]
