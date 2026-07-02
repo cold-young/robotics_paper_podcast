@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-01",
+    "title": "로보틱스 랩실 토크: 손재주 로봇의 미래를 엿보다!",
+    "description": "오늘은 로봇의 손재주 조작(Dexterous Manipulation) 능력을 한 단계 끌어올릴 최신 연구들을 망망이와 뭉이가 소개합니다. 언어 기반 학습부터 4D 예측 모델까지, 로봇이 더 섬세하고 영리해지는 비결을 함께 탐험해 봐요!",
+    "papers": [
+      {
+        "title": "Language-Critique Imitation Learning from Suboptimal Demonstrations",
+        "url": "http://arxiv.org/abs/2607.01225"
+      },
+      {
+        "title": "FurnitureVLA: Learning Long-Horizon Bimanual Furniture Assembly with Vision-Language-Action Model",
+        "url": "http://arxiv.org/abs/2607.01212"
+      },
+      {
+        "title": "Sensorless Four-Channel Control Architecture Using Inverse Dynamics Modeling for Human-Scale Bilateral Teleoperation",
+        "url": "http://arxiv.org/abs/2607.01201"
+      },
+      {
+        "title": "Detecting Adversarial Evasion Attacks Against Autoencoder-Based Network Intrusion Detection Systems",
+        "url": "http://arxiv.org/abs/2607.01194"
+      },
+      {
+        "title": "Structured 4D Latent Predictive Model for Robot Planning",
+        "url": "http://arxiv.org/abs/2607.01166"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-01.mp3",
+    "duration": "10분"
+  },
+  {
     "date": "2026-06-30",
     "title": "로보틱스 랩실의 수다: 손재주 조작의 미래를 엿보다 (260630)",
     "description": "2026년 6월 30일, 로보틱스 분야 최신 논문들을 망망이와 뭉이가 소개합니다. 오늘은 특히 로봇의 손재주 조작(Dexterous Manipulation)과 관련된 흥미로운 연구들을 파헤쳐봅니다!",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-06-25.mp3",
     "duration": "15분 내외"
-  },
-  {
-    "date": "2026-06-24",
-    "title": "오늘의 로봇 손재주 조작, 어디까지 왔을까? - 로보틱스 최신 논문 탐험!",
-    "description": "로보틱스 최신 논문들을 망망이와 뭉이가 함께 파헤쳐보는 시간! 오늘은 로봇 손재주 조작(Dexterous Manipulation)의 세계를 탐험합니다.",
-    "papers": [
-      {
-        "title": "Learning Action Priors for Cross-embodiment Robot Manipulation",
-        "url": "http://arxiv.org/abs/2606.26095"
-      },
-      {
-        "title": "ForceBand: Learning Forceful Manipulation with sEMG",
-        "url": "http://arxiv.org/abs/2606.26093"
-      },
-      {
-        "title": "TryOnCrafter: Unleashing Camera Trajectories for Realistic Video Virtual Try-on via a Renderable 4D Try-on Proxy** `Dexterous` `Manipulation` 🔥 HF#13 <details><summary>Abstract</summary>While Video Virtual Try-on (VVT) has achieved remarkable progress in synthesizing realistic garment overlays on dynamic subjects, existing paradigms remains fundamentally constrained by a passive dependency on source camera trajectories, failing to accommodate the requisite interactive freedom for omnidirectional viewpoint exploration. To address this limitation, we define a pioneering research...</details> | Sheng Tang Team | [ArXiv](http://arxiv.org/abs/2606.26092) / [Web](https://sunhao242.github.io/TryOnCrafter_web.github.io/) |\n| **2026-06-24** | **Analytic Approach to Quantum Control Using Quantum Signal Processing",
-        "url": "http://arxiv.org/abs/2606.26085"
-      },
-      {
-        "title": "Detect, Unlearn, Restore: Defending Text Summarization Models Against Data Poisoning",
-        "url": "http://arxiv.org/abs/2606.26036"
-      },
-      {
-        "title": "Can Trustless Agents Be Trusted? An Empirical Study of the ERC-8004 Decentralized AI Agent Ecosystem",
-        "url": "http://arxiv.org/abs/2606.26028"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-06-24.mp3",
-    "duration": "12분"
   }
 ]
