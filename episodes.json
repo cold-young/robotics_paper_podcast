@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-02",
+    "title": "로보틱스 연구실 엿보기: 섬세한 로봇 손의 비밀, Dexterous Manipulation 최신 연구!",
+    "description": "2026년 7월 2일, 로보틱스 분야의 최신 '손재주 조작(Dexterous Manipulation)' 논문들을 망망이와 뭉이가 쉽고 재미있게 파헤쳐 봅니다.",
+    "papers": [
+      {
+        "title": "VT-WAM: Visual-Tactile World Action Model for Contact-Rich Manipulation",
+        "url": "http://arxiv.org/abs/2607.02503"
+      },
+      {
+        "title": "Automated grading of Linux/bash examinations using large language models: a four-level cognitive taxonomy approach",
+        "url": "http://arxiv.org/abs/2607.02432"
+      },
+      {
+        "title": "WorldSample: Closed-loop Real-robot RL with World Modelling",
+        "url": "http://arxiv.org/abs/2607.02431"
+      },
+      {
+        "title": "Physical surfaces make touch interactions in virtual reality precise, efficient, and bimanual",
+        "url": "http://arxiv.org/abs/2607.02430"
+      },
+      {
+        "title": "LIME: Learning Intent-aware Camera Motion from Egocentric Video",
+        "url": "http://arxiv.org/abs/2607.02417"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-02.mp3",
+    "duration": "12분"
+  },
+  {
     "date": "2026-07-01",
     "title": "로보틱스 랩실 토크: 손재주 로봇의 미래를 엿보다!",
     "description": "오늘은 로봇의 손재주 조작(Dexterous Manipulation) 능력을 한 단계 끌어올릴 최신 연구들을 망망이와 뭉이가 소개합니다. 언어 기반 학습부터 4D 예측 모델까지, 로봇이 더 섬세하고 영리해지는 비결을 함께 탐험해 봐요!",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-06-26.mp3",
     "duration": "약 12분"
-  },
-  {
-    "date": "2026-06-25",
-    "title": "로보틱스 랩 스토리: 손재주 조작, 로봇의 섬세한 터치! (2026년 6월 25일)",
-    "description": "2026년 6월 25일, 로봇의 손재주 조작(Dexterous Manipulation) 분야 최신 논문 5편을 망망이와 뭉이가 흥미진진하게 소개합니다. 로봇이 더욱 섬세하고 똑똑하게 물체를 다루는 미래를 함께 상상해 보세요!",
-    "papers": [
-      {
-        "title": "Scalable Behavior Cloning with Open Data, Training, and Evaluation",
-        "url": "http://arxiv.org/abs/2606.27375"
-      },
-      {
-        "title": "World Action Models Enable Continual Imitation Learning with Recurrent Generative Replays",
-        "url": "http://arxiv.org/abs/2606.27374"
-      },
-      {
-        "title": "VibeAct: Vibration to Actions for Contact-Rich Reactive Robot Dexterity",
-        "url": "http://arxiv.org/abs/2606.27344"
-      },
-      {
-        "title": "RoPEMover: Depth-Aware Object Relocation via Positional Embeddings",
-        "url": "http://arxiv.org/abs/2606.27332"
-      },
-      {
-        "title": "LA4VLA: Learning to Act without Seeing via Language-Action Pretraining",
-        "url": "http://arxiv.org/abs/2606.27295"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-06-25.mp3",
-    "duration": "15분 내외"
   }
 ]
