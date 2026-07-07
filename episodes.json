@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-06",
+    "title": "망망이와 뭉이의 로보틱스 톡! 손재주 조작(Dexterous Manipulation)과 감각의 융합",
+    "description": "카메라 위치 변화에 강인한 VLA 모델부터 변형 물체를 위한 시촉각 데이터셋, 뉴로모픽 촉각 센서까지! 최신 로보틱스 논문 5편을 귀여운 두 호스트가 쉽고 재미있게 풀어드립니다.",
+    "papers": [
+      {
+        "title": "From Fixed to Free Cameras: Calibration-Free View-Robust Vision-Language-Action Model",
+        "url": "http://arxiv.org/abs/2607.05396"
+      },
+      {
+        "title": "Deform360: A Massive Multi-view Visuotactile Dataset for Deformable World Models** `Dexterous` `Manipulation` `Tactile` 🔥 HF#20 <details><summary>Abstract</summary>Predicting object dynamics (i.e., world modeling) is a fundamental challenge for robotic manipulation, and modeling deformable objects presents a particularly difficult case due to their high-dimensional state spaces and complex material properties. While current world models approach this through two distinct paradigms: learning the dynamics over the 2D pixel space or more explicit 3D geometric...</details> | Yunzhu Li Team | [ArXiv](http://arxiv.org/abs/2607.05390) |\n| **2026-07-06** | **Cortex: A Bidirectionally Aligned Embodied Agent Framework for Long-horizon Manipulation",
+        "url": "http://arxiv.org/abs/2607.05377"
+      },
+      {
+        "title": "SovereignPA-Bench: Evaluating User-Owned Personal Agents under Evolving Intent, Platform Mediation, and Consent Constraints",
+        "url": "http://arxiv.org/abs/2607.05363"
+      },
+      {
+        "title": "GelNeuro: A Sensing-Computing Integrated Neuromorphic Tactile System for Texture Recognition",
+        "url": "http://arxiv.org/abs/2607.05241"
+      },
+      {
+        "title": "Square-Root Price Impact Is Necessary for Endogenous Manipulation Cycles in Learning-Agent Markets",
+        "url": "http://arxiv.org/abs/2607.05141"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-06.mp3",
+    "duration": "10분"
+  },
+  {
     "date": "2026-07-02",
     "title": "로보틱스 연구실 엿보기: 섬세한 로봇 손의 비밀, Dexterous Manipulation 최신 연구!",
     "description": "2026년 7월 2일, 로보틱스 분야의 최신 '손재주 조작(Dexterous Manipulation)' 논문들을 망망이와 뭉이가 쉽고 재미있게 파헤쳐 봅니다.",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-06-29.mp3",
     "duration": "15분"
-  },
-  {
-    "date": "2026-06-26",
-    "title": "로보틱스 연구실: 손재주 로봇, 두 손으로 척척! 🐾🐹",
-    "description": "2026년 6월 26일, 오늘은 로봇의 섬세한 손재주 조작(Dexterous Manipulation) 능력에 대한 최신 연구들을 뭉이와 망망이가 함께 파헤쳐 봅니다!",
-    "papers": [
-      {
-        "title": "DexCompose: Reusing Dexterous Policies for Multi-Task Manipulation with a Single Hand",
-        "url": "http://arxiv.org/abs/2606.28323"
-      },
-      {
-        "title": "WARP-RM: A Warp-Augmented Relative Progress Reward Model for Data Curation",
-        "url": "http://arxiv.org/abs/2606.28320"
-      },
-      {
-        "title": "SimFoundry: Modular and Automated Scene Generation for Policy Learning and Evaluation** `Dexterous` 🔥 HF#18 <details><summary>Abstract</summary>Training and evaluating robot policies in the real world is costly and difficult to scale. We introduce SimFoundry, a modular and automated system for zero-shot real-to-sim scene construction from a video. SimFoundry generates sim-ready digital twins and supports object, scene, and task editing, enabling the automated generation of diverse digital cousins: affordance-preserving variations of...</details> | Yuke Zhu Team | [ArXiv](http://arxiv.org/abs/2606.28276) |\n| **2026-06-26** | **Agent-Native Immune System: Architecture, Taxonomy, and Engineering",
-        "url": "http://arxiv.org/abs/2606.28270"
-      },
-      {
-        "title": "Learning Stable In-Grasp Manipulation in a Non-Dropping Action Space",
-        "url": "http://arxiv.org/abs/2606.28196"
-      },
-      {
-        "title": "PA-BiCoop: A Primary-Auxiliary Cooperative Framework for General Bimanual Manipulation",
-        "url": "http://arxiv.org/abs/2606.28192"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-06-26.mp3",
-    "duration": "약 12분"
   }
 ]
