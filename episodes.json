@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-13",
+    "title": "로보틱스 연구실: 2026년 7월 13일, 손재주 로봇의 미래를 엿보다!",
+    "description": "오늘 로보틱스 연구실에서는 망망이와 뭉이가 2026년 7월 13일자 최신 논문들을 살펴보며, 로봇의 섬세한 조작(Dexterous Manipulation) 능력의 진화를 탐구합니다.",
+    "papers": [
+      {
+        "title": "Mixture of Frames Policy: Multi-Frame Action Denoising for Bimanual Mobile Manipulation",
+        "url": "http://arxiv.org/abs/2607.11884"
+      },
+      {
+        "title": "A Minimalist Retargeting-Guided Reinforcement Learning Recipe for Dexterous Manipulation",
+        "url": "http://arxiv.org/abs/2607.11874"
+      },
+      {
+        "title": "Robust bipedal locomotion on flowable slopes via foot-driven terrain manipulation",
+        "url": "http://arxiv.org/abs/2607.11855"
+      },
+      {
+        "title": "HandPad: A Bimanual Hand Interface for Fluid Window Interactions in VR",
+        "url": "http://arxiv.org/abs/2607.11807"
+      },
+      {
+        "title": "A Compact Top-Loading Robot for Endovascular Interventions: Design, Control and Evaluation",
+        "url": "http://arxiv.org/abs/2607.11779"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-13.mp3",
+    "duration": "12분"
+  },
+  {
     "date": "2026-07-10",
     "title": "로봇의 섬세한 손길, 덱스터러스 매니퓰레이션 최신 연구!",
     "description": "오늘 로봇 팟캐스트에서는 망망이와 뭉이가 로봇의 섬세한 손재주 조작(Dexterous Manipulation)을 위한 최신 연구 5편을 파헤쳐 봅니다! B-스플라인부터 공중 조작까지, 흥미진진한 로봇 기술의 세계로 떠나보세요!",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-07-06.mp3",
     "duration": "10분"
-  },
-  {
-    "date": "2026-07-02",
-    "title": "로보틱스 연구실 엿보기: 섬세한 로봇 손의 비밀, Dexterous Manipulation 최신 연구!",
-    "description": "2026년 7월 2일, 로보틱스 분야의 최신 '손재주 조작(Dexterous Manipulation)' 논문들을 망망이와 뭉이가 쉽고 재미있게 파헤쳐 봅니다.",
-    "papers": [
-      {
-        "title": "VT-WAM: Visual-Tactile World Action Model for Contact-Rich Manipulation",
-        "url": "http://arxiv.org/abs/2607.02503"
-      },
-      {
-        "title": "Automated grading of Linux/bash examinations using large language models: a four-level cognitive taxonomy approach",
-        "url": "http://arxiv.org/abs/2607.02432"
-      },
-      {
-        "title": "WorldSample: Closed-loop Real-robot RL with World Modelling",
-        "url": "http://arxiv.org/abs/2607.02431"
-      },
-      {
-        "title": "Physical surfaces make touch interactions in virtual reality precise, efficient, and bimanual",
-        "url": "http://arxiv.org/abs/2607.02430"
-      },
-      {
-        "title": "LIME: Learning Intent-aware Camera Motion from Egocentric Video",
-        "url": "http://arxiv.org/abs/2607.02417"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-02.mp3",
-    "duration": "12분"
   }
 ]
