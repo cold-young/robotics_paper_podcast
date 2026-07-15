@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-14",
+    "title": "로봇 연구소 팟캐스트: 덱스터러스 매니퓰레이션 최신 연구 동향 (2026.07.14)",
+    "description": "2026년 7월 14일, 로보틱스 분야의 최신 논문들을 망망이와 뭉이가 함께 소개합니다! 오늘은 특히 '손재주 조작(Dexterous Manipulation)' 관련 흥미로운 연구들을 만나볼 거예요.",
+    "papers": [
+      {
+        "title": "DenseReward: Dense Reward Learning via Failure Synthesis for Robotic Manipulation",
+        "url": "http://arxiv.org/abs/2607.13033"
+      },
+      {
+        "title": "FlowWAM: Optical Flow as a Unified Action Representation for World Action Models",
+        "url": "http://arxiv.org/abs/2607.13017"
+      },
+      {
+        "title": "Privacy Attacks on Stable Marriage",
+        "url": "http://arxiv.org/abs/2607.13015"
+      },
+      {
+        "title": "Sensing the properties of virtual objects without physical feedback",
+        "url": "http://arxiv.org/abs/2607.12978"
+      },
+      {
+        "title": "ExToken: Structured Exploration for Efficient Vision-Language-Action Reinforcement Fine-tuning",
+        "url": "http://arxiv.org/abs/2607.12931"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-14.mp3",
+    "duration": "약 9분"
+  },
+  {
     "date": "2026-07-13",
     "title": "로보틱스 연구실: 2026년 7월 13일, 손재주 로봇의 미래를 엿보다!",
     "description": "오늘 로보틱스 연구실에서는 망망이와 뭉이가 2026년 7월 13일자 최신 논문들을 살펴보며, 로봇의 섬세한 조작(Dexterous Manipulation) 능력의 진화를 탐구합니다.",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-07-07.mp3",
     "duration": "12분"
-  },
-  {
-    "date": "2026-07-06",
-    "title": "망망이와 뭉이의 로보틱스 톡! 손재주 조작(Dexterous Manipulation)과 감각의 융합",
-    "description": "카메라 위치 변화에 강인한 VLA 모델부터 변형 물체를 위한 시촉각 데이터셋, 뉴로모픽 촉각 센서까지! 최신 로보틱스 논문 5편을 귀여운 두 호스트가 쉽고 재미있게 풀어드립니다.",
-    "papers": [
-      {
-        "title": "From Fixed to Free Cameras: Calibration-Free View-Robust Vision-Language-Action Model",
-        "url": "http://arxiv.org/abs/2607.05396"
-      },
-      {
-        "title": "Deform360: A Massive Multi-view Visuotactile Dataset for Deformable World Models** `Dexterous` `Manipulation` `Tactile` 🔥 HF#20 <details><summary>Abstract</summary>Predicting object dynamics (i.e., world modeling) is a fundamental challenge for robotic manipulation, and modeling deformable objects presents a particularly difficult case due to their high-dimensional state spaces and complex material properties. While current world models approach this through two distinct paradigms: learning the dynamics over the 2D pixel space or more explicit 3D geometric...</details> | Yunzhu Li Team | [ArXiv](http://arxiv.org/abs/2607.05390) |\n| **2026-07-06** | **Cortex: A Bidirectionally Aligned Embodied Agent Framework for Long-horizon Manipulation",
-        "url": "http://arxiv.org/abs/2607.05377"
-      },
-      {
-        "title": "SovereignPA-Bench: Evaluating User-Owned Personal Agents under Evolving Intent, Platform Mediation, and Consent Constraints",
-        "url": "http://arxiv.org/abs/2607.05363"
-      },
-      {
-        "title": "GelNeuro: A Sensing-Computing Integrated Neuromorphic Tactile System for Texture Recognition",
-        "url": "http://arxiv.org/abs/2607.05241"
-      },
-      {
-        "title": "Square-Root Price Impact Is Necessary for Endogenous Manipulation Cycles in Learning-Agent Markets",
-        "url": "http://arxiv.org/abs/2607.05141"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-06.mp3",
-    "duration": "10분"
   }
 ]
