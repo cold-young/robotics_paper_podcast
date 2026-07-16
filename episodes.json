@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-15",
+    "title": "로보틱스 연구실의 뭉망이: 덱스터러스 매니퓰레이션 최신 연구! (2026년 7월 15일)",
+    "description": "오늘 에피소드에서는 최신 덱스터러스 매니퓰레이션 논문 5편을 망망이와 뭉이가 함께 파헤쳐 봅니다. 로봇의 정교한 손재주부터 AI 시스템의 보안, 그리고 미래의 인간-AI 상호작용까지, 흥미진진한 연구들을 만나보세요!",
+    "papers": [
+      {
+        "title": "PhysClaw-0: A Symbiotic Agentic System for Robot Autonomy via Language Corrections",
+        "url": "http://arxiv.org/abs/2607.14047"
+      },
+      {
+        "title": "Industrial Dexterity Benchmark: A Hardware-Software Benchmarking Platform for Industrial Dexterous Manipulation",
+        "url": "http://arxiv.org/abs/2607.14021"
+      },
+      {
+        "title": "Rethinking Penetration Testing for AI-Enabled Systems: From Resource Compromise to Behavioral Objective Violation",
+        "url": "http://arxiv.org/abs/2607.14006"
+      },
+      {
+        "title": "M$^\\text{4}$World: A Multi-view Multimodal Driving World Model for Interactive Object Manipulation and Minute-long Streaming",
+        "url": "http://arxiv.org/abs/2607.14005"
+      },
+      {
+        "title": "ExpressionCueLens: A Cross-Cultural Analysis of Human-AI Companion Conversations on Social Media",
+        "url": "http://arxiv.org/abs/2607.13924"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-15.mp3",
+    "duration": "12-15분"
+  },
+  {
     "date": "2026-07-14",
     "title": "로봇 연구소 팟캐스트: 덱스터러스 매니퓰레이션 최신 연구 동향 (2026.07.14)",
     "description": "2026년 7월 14일, 로보틱스 분야의 최신 논문들을 망망이와 뭉이가 함께 소개합니다! 오늘은 특히 '손재주 조작(Dexterous Manipulation)' 관련 흥미로운 연구들을 만나볼 거예요.",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-07-09.mp3",
     "duration": "13분"
-  },
-  {
-    "date": "2026-07-07",
-    "title": "로봇의 섬세한 손길, 덱스터러스 매니퓰레이션 최신 연구!",
-    "description": "오늘은 로봇이 물체를 섬세하게 다루는 기술, '손재주 조작(Dexterous Manipulation)' 분야의 따끈따끈한 최신 논문 5편을 망망이와 뭉이와 함께 파헤쳐 봅니다!",
-    "papers": [
-      {
-        "title": "Lift3D-VLA: Lifting VLA Models to 3D Geometry and Dynamics-Aware Manipulation",
-        "url": "http://arxiv.org/abs/2607.06564"
-      },
-      {
-        "title": "RynnWorld-4D: 4D Embodied World Models for Robotic Manipulation** `Dexterous` `Manipulation` 🔥 HF#28 <details><summary>Abstract</summary>Robotic manipulation in the open world requires not only recognizing what a scene looks like, but also anticipating how its 3D structure moves under interaction. We argue that synchronized RGB, depth, and optical flow, namely RGB-DF, provide a physically grounded representation that captures the underlying 4D dynamics of a scene. Compared to 2D pixel videos, this multi-modal synergy aligns visual...</details> | Zhongyu Li Team | [ArXiv](http://arxiv.org/abs/2607.06559) / [Web](https://github.com/alibaba-damo-academy/RynnWorld-4D) |\n| **2026-07-07** | **RynnWorld-Teleop: An Action-Conditioned World Model for Digital Teleoperation** `Dexterous` `Manipulation` `Sim2Real` 🔥 HF#27 <details><summary>Abstract</summary>Scaling robot learning requires massive, diverse trajectory data, yet collection is currently bottlenecked by physical teleoperation, where every demonstration binds operator time to specific hardware and workspaces. We introduce digital teleoperation, a paradigm that decouples data collection from physical constraints by replacing the real robot with a generative world model. In this framework,...</details> | Zhongyu Li Team | [ArXiv](http://arxiv.org/abs/2607.06558) / [Web](https://github.com/alibaba-damo-academy/RynnWorld-Teleop) |\n| **2026-07-07** | **UniLM-Nav: A Unified Framework for Zero-Shot Last-Mile Navigation",
-        "url": "http://arxiv.org/abs/2607.06537"
-      },
-      {
-        "title": "Clustering-Embedded Model Predictive Path Integral Control: Avoiding Averaging-Induced Failure and Enabling Efficient Cluster Selection for Dynamic Obstacles",
-        "url": "http://arxiv.org/abs/2607.06499"
-      },
-      {
-        "title": "Correlated Insulating States in Twisted Double Bilayer Graphene Enhanced by Interfacial Effect on CrOCl",
-        "url": "http://arxiv.org/abs/2607.06492"
-      },
-      {
-        "title": "WordVoice: Explicit and Decoupled Multi-Dimensional Word-Level Control for LLM-Based TTS",
-        "url": "http://arxiv.org/abs/2607.06461"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-07.mp3",
-    "duration": "12분"
   }
 ]
