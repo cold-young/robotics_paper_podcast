@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-07-29",
+    "title": "2026년 7월 29일: 로보틱스 최신 논문, 손재주 조작부터 AI 에이전트까지!",
+    "description": "망망이와 뭉이가 소개하는 2026년 7월 29일자 로보틱스 최신 논문! VLA 모델의 효율부터 로봇 학습 가속화, 그리고 AI 에이전트 탐지까지, 흥미로운 연구들을 함께 파헤쳐 봅니다.",
+    "papers": [
+      {
+        "title": "TurboVLA: Real-Time Vision-Language-Action Model at 32 Hz on an RTX 4090 with <1 GB VRAM** `Dexterous` `Manipulation` `VLA` 🔥 HF#14 <details><summary>Abstract</summary>Vision-language-action (VLA) models commonly adopt an LLM-centric $V \\to L \\to A$ pathway, where visual observations are projected into the representation space of a large language model before being decoded into robot actions. Although effective, this design incurs substantial computation and memory overhead at every policy invocation. In this work, we introduce TurboVLA, a new VLA paradigm that...</details> | Han Ding Team | [ArXiv](http://arxiv.org/abs/2607.27205) / [Web](https://github.com/H-EmbodVis/TurboVLA) |\n| **2026-07-29** | **Very Strong Irreversibility of Quantum Entanglement",
+        "url": "http://arxiv.org/abs/2607.27195"
+      },
+      {
+        "title": "DLAM: Distributional Latent Actions with Temporal Constraints",
+        "url": "http://arxiv.org/abs/2607.27138"
+      },
+      {
+        "title": "Algorithms for Linear Ordinary Differential Operators",
+        "url": "http://arxiv.org/abs/2607.27003"
+      },
+      {
+        "title": "SymmGrid: Super-Scaling On-Robot Learning with Parallelized Symmetries and Egocentric-Exocentric Visual Perception",
+        "url": "http://arxiv.org/abs/2607.26985"
+      },
+      {
+        "title": "What Does It Take to Detect an AI Agent? Minimal Feature Sets for Behavioral Detection under Browser Automation",
+        "url": "http://arxiv.org/abs/2607.26935"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-07-29.mp3",
+    "duration": "약 11분"
+  },
+  {
     "date": "2026-07-28",
     "title": "망망이와 뭉이의 로보틱스 다이어리: 실시간 반응부터 청각 인지까지",
     "description": "실시간 반응형 흐름 정책부터 음향 정보를 활용한 손재주 조작, 그리고 LLM 보안과 세계-행동 모델까지 최신 로보틱스 논문 5편을 귀여운 두 호스트가 쉽게 풀어드립니다.",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-07-22.mp3",
     "duration": "14분 30초"
-  },
-  {
-    "date": "2026-07-21",
-    "title": "로보틱스 연구실 팟캐스트: 2026년 7월 21일 덱스터러스 매니퓰레이션 최신 연구!",
-    "description": "2026년 7월 21일, 로보틱스 분야의 최신 논문들을 망망이와 뭉이가 함께 파헤쳐봅니다. 오늘은 특히 손재주 조작(Dexterous Manipulation)과 관련된 흥미로운 연구들을 준비했어요!",
-    "papers": [
-      {
-        "title": "Masked Visual Actions for Unified World Modeling** `Dexterous` 🔥 HF#20 <details><summary>Abstract</summary>Video models absorb rich priors over how the visual world moves, interacts, and responds to contact, making them promising substrates for robotic world modeling. The central challenge is how to communicate action to such models in a form aligned with the visual space in which they learned these interaction priors, yet still grounded in physical manipulation. We introduce Masked Visual Actions, a...</details> | Jia-Bin Huang Team | [ArXiv](http://arxiv.org/abs/2607.19343) / [Web](https://masked-visual-actions.github.io) |\n| **2026-07-21** | **ExpertVerse: A General-Purpose Benchmark for Expert-Level Reasoning in Knowledge-Intensive Visual Synthesis",
-        "url": "http://arxiv.org/abs/2607.19341"
-      },
-      {
-        "title": "SoK: Adversarial Robustness of the Variational Quantum Eigensolver via Red-Teaming",
-        "url": "http://arxiv.org/abs/2607.19318"
-      },
-      {
-        "title": "Inference-Time Steering for Cross-Lingual Factual Consistency in LLMs",
-        "url": "http://arxiv.org/abs/2607.19243"
-      },
-      {
-        "title": "Agentic Real2Sim: Physics-based World Modeling with Vision-Language Agents",
-        "url": "http://arxiv.org/abs/2607.19190"
-      },
-      {
-        "title": "Exploiting Load/Store Leakage of Sparse Vectors for Key Recovery in HQC",
-        "url": "http://arxiv.org/abs/2607.19109"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-21.mp3",
-    "duration": "15분"
   }
 ]
