@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-08-04",
+    "title": "로보틱스 랩실 팟캐스트: 손재주 로봇, 스마트하게 움직이다! (2026년 8월 4일)",
+    "description": "오늘 에피소드에서는 2026년 8월 4일자 '손재주 조작(Dexterous Manipulation)' 관련 최신 논문 5편을 망망이와 뭉이와 함께 살펴봅니다. 효율성부터 인간 협업까지, 로봇의 섬세한 움직임의 미래를 탐험해봐요!",
+    "papers": [
+      {
+        "title": "UniWorld-Design: From Pixel Generation to Layer-Native Design** `Dexterous` 🔥 HF#28 <details><summary>Abstract</summary>We introduce UniWorld-Design, a framework that redefines image generation from flat pixel synthesis to structured visual composition, with semantic RGBA layers as the atomic units of generation, understanding, and editing. Our key insight is that pixels define how an image is rendered, whereas layers define how an image is created, understood, and edited. Just as human designers create and...</details> | Li Yuan Team | [ArXiv](http://arxiv.org/abs/2608.03971) / [Web](https://rabbitvis.rabbitpre.com/blog) |\n| **2026-08-04** | **Bimanual Manipulation Within an 8 GB Budget: Zero-Copy Sensing and Quantized ACT on an Entry-Level Jetson",
+        "url": "http://arxiv.org/abs/2608.03938"
+      },
+      {
+        "title": "When Efficiency Becomes Fragility: Exploiting Dynamic Routing Vulnerabilities in Adaptive UAV Tracking",
+        "url": "http://arxiv.org/abs/2608.03902"
+      },
+      {
+        "title": "EvoHIL: Self-Evolving Reward and Flow-Matched Policy Optimization for Robust Human-in-the-Loop Reinforcement Learning",
+        "url": "http://arxiv.org/abs/2608.03872"
+      },
+      {
+        "title": "LiteMVS: Efficient Multi-View Stereo with Foundation Distillation and Expert Aggregation",
+        "url": "http://arxiv.org/abs/2608.03851"
+      },
+      {
+        "title": "GORDON: Graph-based Object-centric Rewards for Decomposition of Long-Horizon Manipulation",
+        "url": "http://arxiv.org/abs/2608.03753"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-08-04.mp3",
+    "duration": "12분"
+  },
+  {
     "date": "2026-07-31",
     "title": "로봇 연구실 팟캐스트: 섬세한 로봇의 손길, Dexterous Manipulation 최신 연구!",
     "description": "2026년 7월 31일, 망망이와 뭉이가 로봇의 섬세한 손재주 조작(Dexterous Manipulation)을 가능하게 할 최신 논문 5편을 소개합니다.",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-07-28.mp3",
     "duration": "10분"
-  },
-  {
-    "date": "2026-07-24",
-    "title": "로보틱스 랩실 토크: 섬세한 로봇의 손재주, 덱스터러스 매니퓰레이션 최신 연구!",
-    "description": "오늘 에피소드에서는 로봇의 섬세한 손재주, 즉 덱스터러스 매니퓰레이션과 관련된 최신 논문 5편을 망망이와 뭉이가 소개합니다. 로봇 월드 모델부터 촉각 학습, 그리고 로봇의 새로운 소통 방식까지, 흥미로운 연구들을 함께 탐험해 보세요!",
-    "papers": [
-      {
-        "title": "Robot-Factored World Models via Robot Rendering",
-        "url": "http://arxiv.org/abs/2607.22535"
-      },
-      {
-        "title": "ViTacWorld: Scaling Visuo-Tactile World Models for Contact-Rich Robot Manipulation",
-        "url": "http://arxiv.org/abs/2607.22530"
-      },
-      {
-        "title": "Plug, Play, and Comply: A Modular Framework for Online Variable Impedance with Arbitrarily Oriented Compliance Axes",
-        "url": "http://arxiv.org/abs/2607.22483"
-      },
-      {
-        "title": "Multiplexed storage and interaction of Rydberg spinwaves via the gradient echo memory protocol",
-        "url": "http://arxiv.org/abs/2607.22466"
-      },
-      {
-        "title": "Robot Learning to Communicate through Projected Visual Abstractions",
-        "url": "http://arxiv.org/abs/2607.22434"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-24.mp3",
-    "duration": "12분"
   }
 ]
