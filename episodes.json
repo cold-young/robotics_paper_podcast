@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-08-11",
+    "title": "로보틱스 랩실 팟캐스트: 덱스터러스 매니퓰레이션, 그 너머의 조작들!",
+    "description": "오늘은 로봇의 섬세한 조작(Dexterous Manipulation)에 대한 논문부터, '조작'이라는 단어가 들어간 흥미로운 최신 연구들까지 함께 살펴봅니다! 뭉이와 망망이와 함께 로봇 공학의 최신 트렌드를 파헤쳐 볼까요?",
+    "papers": [
+      {
+        "title": "Surgical WAM: A World-Action Model for Data-Efficient Surgical Robot Learning",
+        "url": "http://arxiv.org/abs/2608.11204"
+      },
+      {
+        "title": "VidForensics-M1: Meta-Detection Reinforcement Learning with Verifiable Temporal Grounding for AI-Generated Video Forensics",
+        "url": "http://arxiv.org/abs/2608.11201"
+      },
+      {
+        "title": "Using Deposition Rate and Substrate Temperature to Manipulate Liquid Crystal-like Order in a Vapor-deposited Hexagonal Columnar Glass",
+        "url": "http://arxiv.org/abs/2608.11081"
+      },
+      {
+        "title": "Data Attribution of Emergent Misalignment with Persona Features",
+        "url": "http://arxiv.org/abs/2608.11025"
+      },
+      {
+        "title": "Non-resonant laser-driven narrowing of particle velocity distributions",
+        "url": "http://arxiv.org/abs/2608.10998"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-08-11.mp3",
+    "duration": "12분"
+  },
+  {
     "date": "2026-08-06",
     "title": "로보틱스 랩실 엿보기: 2026년 8월 6일, 손재주 로봇의 미래를 엿보다!",
     "description": "2026년 8월 6일, 로보틱스 분야의 최신 논문 5편을 망망이와 뭉이가 쉽고 재미있게 소개합니다. 오늘은 특히 로봇의 '손재주(Dexterous Manipulation)'에 초점을 맞춰볼 거예요!",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-07-31.mp3",
     "duration": "약 12분"
-  },
-  {
-    "date": "2026-07-30",
-    "title": "로보틱스 연구실 엿보기: 섬세한 손재주 로봇의 미래를 엿보다!",
-    "description": "오늘 에피소드에서는 최신 로보틱스 논문 다섯 편을 통해 섬세한 손재주 조작(Dexterous Manipulation) 분야의 뜨거운 연구 동향을 망망이와 뭉이가 함께 파헤쳐 봅니다!",
-    "papers": [
-      {
-        "title": "ACE-Data-0: Human-Centric Ambient Capture as Embodied Data Engine** `Dexterous` `Manipulation` `VLA` 🔥 HF#35 <details><summary>Abstract</summary>Embodied intelligence faces a fundamental data bottleneck. Models must capture how first-person perception, whole-body motion, dexterous manipulation, object state, sound, and touch evolve together as humans pursue goals over time. Existing datasets fragment this experience across viewpoints, modalities, or spatial scales, leaving the full perception-action loop only partially observed. We...</details> | Ziwei Liu Team | [ArXiv](http://arxiv.org/abs/2607.28625) / [Web](https://ace-data-engine.github.io/ACE-Data-0/) |\n| **2026-07-30** | **FA-RDP: A Frequency-Adaptive Reactive Diffusion Policy for Contact-Rich Manipulation",
-        "url": "http://arxiv.org/abs/2607.28596"
-      },
-      {
-        "title": "Can Vision-Language Models Reason about AI Edits in Images?",
-        "url": "http://arxiv.org/abs/2607.28464"
-      },
-      {
-        "title": "FasTac: A Curved Multispectral Vision-Based Tactile Sensor for High-Speed High-Precision 3D Shape and Force Perception",
-        "url": "http://arxiv.org/abs/2607.28416"
-      },
-      {
-        "title": "QuantWAMs: Calibrating at the Right Granularity for World Action Models",
-        "url": "http://arxiv.org/abs/2607.28405"
-      },
-      {
-        "title": "TacWAM: Anchor-Guided World Action Model with Mechanics-Aware Tactile Prediction",
-        "url": "http://arxiv.org/abs/2607.28391"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-30.mp3",
-    "duration": "약 15분"
   }
 ]
