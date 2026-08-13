@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-08-12",
+    "title": "오늘의 로보틱스 논문 브리핑: 손재주 조작, 그 섬세한 세계로!",
+    "description": "로보틱스 분야의 최신 손재주 조작(Dexterous Manipulation) 관련 논문들을 망망이와 뭉이가 쉽고 재미있게 풀어드립니다. 인간형 로봇의 섬세한 움직임부터 VLA 모델의 혁신까지, 로봇의 손재주가 어디까지 발전했는지 함께 알아봐요!",
+    "papers": [
+      {
+        "title": "Policy-Induced Hand Priors in Humanoid Dual-Arm Manipulation: Diagnosing and Mitigating Initial-Pose Dependence",
+        "url": "http://arxiv.org/abs/2608.11769"
+      },
+      {
+        "title": "G0.5: One Autoregressive Stream for Robot Reasoning and Action",
+        "url": "http://arxiv.org/abs/2608.11739"
+      },
+      {
+        "title": "StellaVLA: In-Context Structured Demonstration for Generalizable Vision-Language-Action Models",
+        "url": "http://arxiv.org/abs/2608.11671"
+      },
+      {
+        "title": "Learning Loco-Manipulation From SMPC Demonstrations With Sparse Offline-to-Online RL",
+        "url": "http://arxiv.org/abs/2608.12063"
+      },
+      {
+        "title": "AVA-Encoder: Towards Agent-Native Video Representation Learning** `Dexterous` 🔥 HF#20 <details><summary>Abstract</summary>Creative agents still lack an effective way to learn from high-quality human films, limiting their ability to produce cinematic-grade videos. A key challenge is the absence of a structured video representation that is both faithful to film content and directly usable for agentic reasoning and manipulation. To address the challenge, we propose the Agentic Video Auto-Encoder (AVA-Encoder), a...</details> | Ruihua Hua Team | [ArXiv](http://arxiv.org/abs/2608.12313) |\n| **2026-08-12** | **Redistribution-based Cost Inference Improves Sparse Safe Offline RL",
+        "url": "http://arxiv.org/abs/2608.12306"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-08-12.mp3",
+    "duration": "15분"
+  },
+  {
     "date": "2026-08-11",
     "title": "로보틱스 랩실 팟캐스트: 덱스터러스 매니퓰레이션, 그 너머의 조작들!",
     "description": "오늘은 로봇의 섬세한 조작(Dexterous Manipulation)에 대한 논문부터, '조작'이라는 단어가 들어간 흥미로운 최신 연구들까지 함께 살펴봅니다! 뭉이와 망망이와 함께 로봇 공학의 최신 트렌드를 파헤쳐 볼까요?",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-08-04.mp3",
     "duration": "12분"
-  },
-  {
-    "date": "2026-07-31",
-    "title": "로봇 연구실 팟캐스트: 섬세한 로봇의 손길, Dexterous Manipulation 최신 연구!",
-    "description": "2026년 7월 31일, 망망이와 뭉이가 로봇의 섬세한 손재주 조작(Dexterous Manipulation)을 가능하게 할 최신 논문 5편을 소개합니다.",
-    "papers": [
-      {
-        "title": "Diagnosing Compositional Generalization in Sequential Robot Tasks",
-        "url": "http://arxiv.org/abs/2607.29687"
-      },
-      {
-        "title": "Balancing of Humanoid with Object Mass: Trade-off Analyses and Lifting Control",
-        "url": "http://arxiv.org/abs/2607.29625"
-      },
-      {
-        "title": "WCM: A World Critic Model for Vision-Language-Action Reinforcement Learning",
-        "url": "http://arxiv.org/abs/2607.29613"
-      },
-      {
-        "title": "Safe Vision Language Action Models via Barrier Enhanced Flow Matching",
-        "url": "http://arxiv.org/abs/2607.29569"
-      },
-      {
-        "title": "TransGraspNet: Physically and Geometrically Consistent Manipulation of Transparent Labware",
-        "url": "http://arxiv.org/abs/2607.29567"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-07-31.mp3",
-    "duration": "약 12분"
   }
 ]
