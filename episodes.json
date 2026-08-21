@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-08-20",
+    "title": "로보틱스 연구실 엿보기: 2026년 8월 20일, 손재주 조작 최신 트렌드!",
+    "description": "2026년 8월 20일, 로보틱스 분야의 최신 논문들을 망망이와 뭉이가 소개합니다! 오늘은 '손재주 조작(Dexterous Manipulation)' 관련 뜨거운 연구들을 파헤쳐 봅니다.",
+    "papers": [
+      {
+        "title": "RoMAN-Flow: Taming Autoregressive Normalizing Flows for Offline Reinforcement Learning in Robotic Manipulation",
+        "url": "http://arxiv.org/abs/2608.20208"
+      },
+      {
+        "title": "Adaptive RBFNN Control of Uncertain Bilateral Teleoperation Systems with Delay-Dependent LMI Stability Conditions",
+        "url": "http://arxiv.org/abs/2608.20182"
+      },
+      {
+        "title": "Wave-Based Bilateral Teleoperation between Nonlinear Manipulators with Direct Contact Force Feedback",
+        "url": "http://arxiv.org/abs/2608.20043"
+      },
+      {
+        "title": "Inter-X++: A Comprehensive Benchmark for Multimodal Human-Human Interaction Analysis",
+        "url": "http://arxiv.org/abs/2608.20312"
+      },
+      {
+        "title": "DreamHand: Repurposing Video Diffusion Models for Occlusion-Robust Egocentric 3D Hand Motion Recovery",
+        "url": "http://arxiv.org/abs/2608.20308"
+      }
+    ],
+    "audio_file": "episodes/episode_2026-08-20.mp3",
+    "duration": "13분"
+  },
+  {
     "date": "2026-08-19",
     "title": "로봇 연구실 옆 뭉망이: 섬세한 손재주, 로봇 팔의 진화!",
     "description": "오늘 에피소드에서는 로봇의 섬세한 손재주 조작(Dexterous Manipulation) 분야의 최신 논문들을 망망이와 뭉이가 함께 살펴봅니다. 양팔 조작부터 강화 학습까지, 로봇 팔의 놀라운 발전을 만나보세요!",
@@ -114,34 +143,5 @@
     ],
     "audio_file": "episodes/episode_2026-08-13.mp3",
     "duration": "18분 30초"
-  },
-  {
-    "date": "2026-08-12",
-    "title": "오늘의 로보틱스 논문 브리핑: 손재주 조작, 그 섬세한 세계로!",
-    "description": "로보틱스 분야의 최신 손재주 조작(Dexterous Manipulation) 관련 논문들을 망망이와 뭉이가 쉽고 재미있게 풀어드립니다. 인간형 로봇의 섬세한 움직임부터 VLA 모델의 혁신까지, 로봇의 손재주가 어디까지 발전했는지 함께 알아봐요!",
-    "papers": [
-      {
-        "title": "Policy-Induced Hand Priors in Humanoid Dual-Arm Manipulation: Diagnosing and Mitigating Initial-Pose Dependence",
-        "url": "http://arxiv.org/abs/2608.11769"
-      },
-      {
-        "title": "G0.5: One Autoregressive Stream for Robot Reasoning and Action",
-        "url": "http://arxiv.org/abs/2608.11739"
-      },
-      {
-        "title": "StellaVLA: In-Context Structured Demonstration for Generalizable Vision-Language-Action Models",
-        "url": "http://arxiv.org/abs/2608.11671"
-      },
-      {
-        "title": "Learning Loco-Manipulation From SMPC Demonstrations With Sparse Offline-to-Online RL",
-        "url": "http://arxiv.org/abs/2608.12063"
-      },
-      {
-        "title": "AVA-Encoder: Towards Agent-Native Video Representation Learning** `Dexterous` 🔥 HF#20 <details><summary>Abstract</summary>Creative agents still lack an effective way to learn from high-quality human films, limiting their ability to produce cinematic-grade videos. A key challenge is the absence of a structured video representation that is both faithful to film content and directly usable for agentic reasoning and manipulation. To address the challenge, we propose the Agentic Video Auto-Encoder (AVA-Encoder), a...</details> | Ruihua Hua Team | [ArXiv](http://arxiv.org/abs/2608.12313) |\n| **2026-08-12** | **Redistribution-based Cost Inference Improves Sparse Safe Offline RL",
-        "url": "http://arxiv.org/abs/2608.12306"
-      }
-    ],
-    "audio_file": "episodes/episode_2026-08-12.mp3",
-    "duration": "15분"
   }
 ]
